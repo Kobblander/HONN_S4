@@ -1,7 +1,21 @@
-@(message: String)
+@(title: String = "Welcome!")
 
-@main("Welcome to Play") {
+@import play.api.Play.current
 
-    @play20.welcome(message, style = "Java")
+@main(title) {
 
+    <h2>Welcome to Ruber</h2>
+
+    @if(session.get("username")) {
+
+        <h3>Good to see you again @{session.get("displayName")}!</h3>
+
+    } else {
+
+        <h3>Looks like you're new here!</h3>
+        <p>
+            <a class="btn" href="@routes.SignupController.blank()">Sign up</a>
+            <a class="btn" href="@routes.LoginController.blank()">Login</a>
+        </p>
+    }
 }
