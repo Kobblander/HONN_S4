@@ -16,51 +16,52 @@ import java.util.Map;
 
 public class UserData extends RuData implements UserDataGateway
 {
-  public int addUser(User user)
-  {
-    SimpleJdbcInsert insert =
-        new SimpleJdbcInsert(getDataSource())
-            .withTableName("ru_users")
-            .usingGeneratedKeyColumns("id");
-
-    Map<String, Object> parameters = new HashMap<String, Object>(6);
-    parameters.put("username", user.getUsername());
-    parameters.put("firstname", user.getFirstName());
-    parameters.put("lastname", user.getLastName());
-    parameters.put("password", user.getPassword());
-    parameters.put("email", user.getEmail());
-    parameters.put("registered", new Date());
-
-    int returnKey;
-
-    try
+    public int addUser(User user)
     {
-      returnKey = insert.executeAndReturnKey(parameters).intValue();
-    }
-    catch(DataIntegrityViolationException divex)
-    {
-      throw new UsernameExistsException("User " + user.getUsername() + " already exits", divex);
+
+        SimpleJdbcInsert insert =
+                new SimpleJdbcInsert(getDataSource())
+                        .withTableName("ru_users")
+                        .usingGeneratedKeyColumns("id");
+
+        Map<String, Object> parameters = new HashMap<String, Object>(6);
+        parameters.put("username", user.getUsername());
+        parameters.put("firstname", user.getFirstName());
+        parameters.put("lastname", user.getLastName());
+        parameters.put("password", user.getPassword());
+        parameters.put("email", user.getEmail());
+        parameters.put("registered", new Date());
+
+        int returnKey;
+
+        try
+        {
+            returnKey = insert.executeAndReturnKey(parameters).intValue();
+        }
+        catch(DataIntegrityViolationException divex)
+        {
+            throw new UsernameExistsException("User " + user.getUsername() + " already exits", divex);
+        }
+
+        user.setId(returnKey);
+        return returnKey;
     }
 
-    user.setId(returnKey);
-    return returnKey;
-  }
-
-  public User getUserByUsername(String username)
-  {
-    Collection<String> users;
-    JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
-
-    User user;
-    try
+    public User getUserByUsername(String username)
     {
-      user = (User)jdbcTemplate.queryForObject(
-          "select * from ru_users where username = '" + username + "'", new UserRowMapper());
+        Collection<String> users;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+
+        User user;
+        try
+        {
+            user = (User)jdbcTemplate.queryForObject(
+                    "select * from ru_users where username = '" + username + "'", new UserRowMapper());
+        }
+        catch (EmptyResultDataAccessException erdaex)
+        {
+            throw new UserNotFoundException("No user found with username: " + username);
+        }
+        return user;
     }
-    catch (EmptyResultDataAccessException erdaex)
-    {
-      throw new UserNotFoundException("No user found with username: " + username);
-    }
-    return user;
-  }
 }

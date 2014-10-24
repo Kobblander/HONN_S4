@@ -3,7 +3,8 @@ package is.ru.honn.ruber.domain;
 /**
  * <h1>Review</h1>
  * <h2>is.ru.honn.ruber.domain</h2>
- * <p></p>
+ * <p>A simple POJO represing one review which is attached to a
+ * single driver.</p>
  * Created on 24.10.2014.
  *
  * @author jakob

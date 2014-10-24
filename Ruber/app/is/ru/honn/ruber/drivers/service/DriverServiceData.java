@@ -2,8 +2,10 @@ package is.ru.honn.ruber.drivers.service;
 
 import is.ru.honn.ruber.domain.Driver;
 import is.ru.honn.ruber.domain.Review;
+import is.ru.honn.ruber.drivers.data.DriverDataGateway;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * <h1>DriverServiceData</h1>
@@ -16,7 +18,14 @@ import java.util.List;
  */
 public class DriverServiceData implements DriverService {
 
+    private Logger log = Logger.getLogger(DriverServiceData.class.getName());
+    private DriverDataGateway driverDataGateway;
+
     public DriverServiceData() {
+    }
+
+    public DriverServiceData(DriverDataGateway driverDataGateway) {
+        this.driverDataGateway = driverDataGateway;
     }
 
     @Override

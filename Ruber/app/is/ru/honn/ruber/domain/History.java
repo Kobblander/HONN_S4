@@ -3,6 +3,15 @@ package is.ru.honn.ruber.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h1>History</h1>
+ * <h2>is.ru.honn.ruber.domain</h2>
+ * <p>A simple POJO represinting a history of trips for a single user.</p>
+ * Created on 24.10.2014.
+ *
+ * @author jakob
+ * @version 1.1
+ */
 public class History
 {
   protected int offset;
