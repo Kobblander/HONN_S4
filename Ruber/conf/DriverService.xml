@@ -24,8 +24,9 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="driverService" class="is.ru.honn.ruber.drivers.service.DriverServiceData" >
-        <constructor-arg index="0" ref="driverDataGateway"/>
+    <bean id="driverService" class="is.ru.honn.ruber.drivers.service.DriverServiceStub" >
+        <!-- Uncomment when using DriverServicData -->
+        <!-- <constructor-arg index="0" ref="driverDataGateway"/> -->
     </bean>
 
 

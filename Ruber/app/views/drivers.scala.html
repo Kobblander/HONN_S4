@@ -1,0 +1,12 @@
+@(drivers: java.util.List[is.ru.honn.ruber.domain.Driver])
+
+@main(title = "Drivers") {
+
+	@for(driver <- drivers) {
+		<div class="gesture-item">
+			<h3>@driver.getFirstName() @driver.getLastName()</h3>
+			<h4>@driver.getEmail()</h4>
+		</div>
+	}
+
+}
