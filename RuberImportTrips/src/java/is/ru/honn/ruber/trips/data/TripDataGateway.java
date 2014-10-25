@@ -1,6 +1,6 @@
 package is.ru.honn.ruber.trips.data;
 
-import is.ru.honn.ruber.domain.Trip;
+import is.ru.honn.ruber.trips.domain.Trip;
 import is.ru.honn.ruber.trips.service.TripExistsException;
 import is.ru.honn.ruber.trips.service.TripNotFoundException;
 import is.ruframework.data.RuDataAccess;

@@ -1,7 +1,7 @@
 package is.ru.honn.ruber.trips.data;
 
-import is.ru.honn.ruber.domain.Trip;
-import is.ru.honn.ruber.domain.TripStatus;
+import is.ru.honn.ruber.trips.domain.Trip;
+import is.ru.honn.ruber.trips.domain.TripStatus;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

@@ -1,6 +1,6 @@
 package is.ru.honn.ruber.trips.service;
 
-import is.ru.honn.ruber.domain.Trip;
+import is.ru.honn.ruber.trips.domain.Trip;
 import is.ru.honn.ruber.trips.data.TripDataGateway;
 import is.ruframework.data.RuData;
 import org.springframework.dao.DataIntegrityViolationException;

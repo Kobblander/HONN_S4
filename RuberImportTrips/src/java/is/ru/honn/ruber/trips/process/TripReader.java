@@ -1,7 +1,7 @@
 package is.ru.honn.ruber.trips.process;
 
-import is.ru.honn.ruber.domain.Trip;
-import is.ru.honn.ruber.domain.TripStatus;
+import is.ru.honn.ruber.trips.domain.Trip;
+import is.ru.honn.ruber.trips.domain.TripStatus;
 import is.ruframework.http.SimpleHttpRequest;
 import org.apache.http.client.ClientProtocolException;
 import org.json.simple.JSONArray;

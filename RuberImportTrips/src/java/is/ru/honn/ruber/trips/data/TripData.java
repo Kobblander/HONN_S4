@@ -1,14 +1,10 @@
 package is.ru.honn.ruber.trips.data;
 
-import is.ru.honn.ruber.domain.Trip;
-import is.ru.honn.ruber.domain.TripStatus;
+import is.ru.honn.ruber.trips.domain.Trip;
+import is.ru.honn.ruber.trips.domain.TripStatus;
 import is.ru.honn.ruber.trips.service.TripExistsException;
 import is.ru.honn.ruber.trips.service.TripNotFoundException;
-import is.ru.honn.ruber.users.data.UserRowMapper;
-import is.ru.honn.ruber.users.service.UserNotFoundException;
 import is.ruframework.data.RuData;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -63,17 +59,7 @@ public class TripData extends RuData implements TripDataGateway {
         List<Trip> trips = new ArrayList<Trip>();
         try
         {
-            List<Map<String, Object>> rows = jdbcTemplate.queryForList("select * from ru_trips where userId = '" + userId + "'");
-            for (Map row : rows) {
-                Trip trip = new Trip();
-                trip.setDistance((Double) (row.get("distance")));
-                trip.setEndTime((Long) (row.get("endTime")));
-                trip.setStartTime((Long) (row.get("startTime")));
-                trip.setProductId((Integer)row.get("productId"));
-                trip.setRequestTime((Long)(row.get("requestTime")));
-                trip.setStatus(TripStatus.valueOf(row.get("tripStatus").toString()));
-                trips.add(trip);
-            }
+            trips = jdbcTemplate.query("select * from ru_trips where userId = '" + userId + "'", new TripRowMapper());
         }
         catch (EmptyResultDataAccessException erdaex)
         {
