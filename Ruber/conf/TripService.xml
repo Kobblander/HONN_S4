@@ -16,16 +16,17 @@
             <value>hshjakobt12</value>
         </property>
         <property name="password">
-	    <value>eic0obn9</value>
+            <value>eic0obn9</value>
         </property>
     </bean>
 
-    <bean id="userDataGateway" class="is.ru.honn.ruber.users.data.UserData">
+    <bean id="tripDataGateway" class="is.ru.honn.ruber.trips.data.TripData">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="userService" class="is.ru.honn.ruber.users.service.UserServiceData" >
-        <constructor-arg index="0" ref="userDataGateway"/>
+    <bean id="tripService" class="is.ru.honn.ruber.trips.service.TripServiceStub" >
+        <!-- Uncomment when using RidesData -->
+        <!-- <constructor-arg index="0" ref="tripDataGateway"/> -->
     </bean>
 
 
