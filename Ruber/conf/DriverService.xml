@@ -20,6 +20,42 @@
         </property>
     </bean>
 
+    <bean id="mockDriver1" class="is.ru.honn.ruber.domain.Driver">
+        <property name="firstName" value="Gunnar"></property>
+        <property name="lastName" value="Jonsson"></property>
+        <property name="email" value="gunnar@mail.com"></property>
+        <property name="id" value="1"></property>
+        <property name="username" value="gunnar1"></property>
+        <property name="password" value="gjunnar"></property>
+    </bean>
+
+    <bean id="mockDriver2" class="is.ru.honn.ruber.domain.Driver">
+        <property name="firstName" value="Peter"></property>
+        <property name="lastName" value="Griffin"></property>
+        <property name="email" value="peter@mail.com"></property>
+        <property name="id" value="2"></property>
+        <property name="username" value="peter2"></property>
+        <property name="password" value="p2bean"></property>
+    </bean>
+
+    <bean id="mockProduct1" class="is.ru.honn.ruber.domain.Product">
+        <property name="capacity" value="4"></property>
+        <property name="description" value="Tesla S"></property>
+        <property name="display_name" value="UberX"></property>
+        <property name="driverId" value="1"></property>
+        <property name="id" value="1"></property>
+        <property name="image" value="http://www.blogcdn.com/www.autoblog.com/media/2012/09/01-2012-tesla-model-s-fd-1347336745.jpg"></property>
+    </bean>
+
+    <bean id="mockProduct2" class="is.ru.honn.ruber.domain.Product">
+        <property name="capacity" value="6"></property>
+        <property name="description" value="Tesla X"></property>
+        <property name="display_name" value="UberSUV"></property>
+        <property name="driverId" value="2"></property>
+        <property name="id" value="2"></property>
+        <property name="image" value="http://images.dailytech.com/nimage/Tesla-Model-X-promo.jpg"></property>
+    </bean>
+
     <bean id="driverDataGateway" class="is.ru.honn.ruber.drivers.data.DriverData">
         <property name="dataSource" ref="dataSource"/>
     </bean>
@@ -27,6 +63,18 @@
     <bean id="driverService" class="is.ru.honn.ruber.drivers.service.DriverServiceStub" >
         <!-- Uncomment when using DriverServicData -->
         <!-- <constructor-arg index="0" ref="driverDataGateway"/> -->
+        <property name="drivers">
+            <list>
+                <ref bean="mockDriver1"></ref>
+                <ref bean="mockDriver2"></ref>
+            </list>
+        </property>
+        <property name="products">
+            <list>
+                <ref bean="mockProduct1"></ref>
+                <ref bean="mockProduct2"></ref>
+            </list>
+        </property>
     </bean>
 
 

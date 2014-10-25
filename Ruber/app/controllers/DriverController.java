@@ -1,18 +1,22 @@
 package controllers;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import is.ru.honn.ruber.domain.Driver;
+import is.ru.honn.ruber.domain.Product;
 import is.ru.honn.ruber.drivers.service.DriverService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.*;
 import is.ru.honn.ruber.domain.Review;
 
 import views.html.reviews;
 import views.html.drivers;
+import views.html.driver;
 
 import java.util.List;
+
+import static play.data.Form.form;
 
 /**
  * <h1>DriverController</h1>
@@ -26,40 +30,41 @@ import java.util.List;
 public class DriverController extends Controller {
 	protected static ApplicationContext ctx = new FileSystemXmlApplicationContext("/conf/DriverService.xml");
 
+	final static Form<Review> reviewForm = form(Review.class);
+
+	final static DriverService service = (DriverService) ctx.getBean("driverService");
+
 	public static Result review(int driverID) {
 
-		DriverService service = (DriverService) ctx.getBean("driverService");
-
-		System.out.println(driverID);
-		JsonNode json = request().body().asJson();
-		if(json == null)
-			return badRequest("No data sent");
-		String sRating = json.findPath("rating").textValue();
-		if(sRating == null)
-			return badRequest("No rating sent");
-		String comment = json.findPath("comment").textValue();
-		int rating = Integer.parseInt(sRating);
-
+		Form<Review> filledForm = reviewForm.bindFromRequest();
+		int rating = Integer.parseInt(filledForm.field("rating").value());
+		String comment = filledForm.field("comment").value();
 		Review review = new Review(driverID, rating, comment);
 
 		service.addDriverReview(driverID, review);
 
-		return ok("Success!");
+		List<Review> dReviews = service.getDriverReviews(driverID);
+
+		return ok(reviews.render(dReviews, reviewForm, driverID));
 	}
 
 	public static Result getDriverReviews(int driverID) {
-		DriverService service = (DriverService) ctx.getBean("driverService");
 
 		List<Review> dReviews = service.getDriverReviews(driverID);
 
-		return ok(reviews.render(dReviews));
+		return ok(reviews.render(dReviews, reviewForm, driverID));
 	}
 
 	public static Result getDrivers() {
-		DriverService service = (DriverService) ctx.getBean("driverService");
-
 		List<Driver> allDrivers = service.getDrivers();
 
 		return ok(drivers.render(allDrivers));
+	}
+
+	public static Result getDriver(int driverID) {
+		Driver driverToView = service.getDriverByID(driverID);
+		Product product = service.getProductByDriverId(driverID);
+
+		return ok(driver.render(driverToView, product));
 	}
 }

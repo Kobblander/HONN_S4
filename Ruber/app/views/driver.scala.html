@@ -1,0 +1,12 @@
+@(driver: is.ru.honn.ruber.domain.Driver, product: is.ru.honn.ruber.domain.Product)
+
+@main(title = driver.getFirstName()) {
+
+	<h2>@driver.getFirstName() @driver.getLastName()</h2>
+
+	<a href="@routes.DriverController.getDriverReviews(driver.getId)">View reviews</a>
+
+	<h3>Car: @product.getDescription()</h3>
+	<img src="@product.getImage()" alt="Car">
+
+}
