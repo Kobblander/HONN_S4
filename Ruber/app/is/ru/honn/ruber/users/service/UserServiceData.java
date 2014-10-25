@@ -1,10 +1,14 @@
 package is.ru.honn.ruber.users.service;
 
 
+import is.ru.honn.ruber.domain.History;
+import is.ru.honn.ruber.domain.Trip;
 import is.ru.honn.ruber.users.data.UserDataGateway;
 import is.ru.honn.ruber.domain.User;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class UserServiceData implements UserService
@@ -37,6 +41,25 @@ public class UserServiceData implements UserService
             throw new UserNotFoundException("User not found: " + username);
         }
         return user;
+    }
+
+    @Override
+    public History getUserHistory(int userId, int offset, int limit) {
+        History history = new History(offset, limit, limit);
+        int start = offset * limit;
+        int end = offset * limit + limit;
+
+        try {
+            List<Trip> trips = userDataGateway.getTripsByUserId(userId).subList(start, end);
+            for (Trip t : trips) {
+                history.addTrip(t);
+            }
+        } catch (TripNotFoundException e) {
+            String msg = "Trip not found; " + e.getMessage();
+            log.severe(msg);
+        }
+
+        return history;
     }
 
 }

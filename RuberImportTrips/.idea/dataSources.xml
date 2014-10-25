@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="4213104675">
+    <data-source source="LOCAL" name="SQL Server - @hrnem.ru.is" uuid="c493302f-db5c-4218-8211-65a2604edd17">
+      <driver-ref>sqlserver.jtds</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>net.sourceforge.jtds.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:jtds:sqlserver://hrnem.ru.is:1433</jdbc-url>
+      <user-name>hshjakobt12</user-name>
+      <user-password>dfcfdfc3dfc9df9adfc5dfc8dfc4df93</user-password>
+      <default-dialect>TEXT</default-dialect>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

@@ -1,6 +1,9 @@
 package is.ru.honn.ruber.users.data;
 
+import is.ru.honn.ruber.domain.History;
+import is.ru.honn.ruber.domain.Trip;
 import is.ru.honn.ruber.domain.User;
+import is.ru.honn.ruber.users.service.TripNotFoundException;
 import is.ru.honn.ruber.users.service.UserNotFoundException;
 import is.ru.honn.ruber.users.service.UsernameExistsException;
 import is.ruframework.data.RuData;
@@ -9,10 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class UserData extends RuData implements UserDataGateway
 {
@@ -55,8 +55,7 @@ public class UserData extends RuData implements UserDataGateway
         User user;
         try
         {
-            user = (User)jdbcTemplate.queryForObject(
-                    "select * from ru_users where username = '" + username + "'", new UserRowMapper());
+            user = (User)jdbcTemplate.queryForObject( "select * from ru_users where username = '" + username + "'", new UserRowMapper());
         }
         catch (EmptyResultDataAccessException erdaex)
         {
@@ -64,4 +63,22 @@ public class UserData extends RuData implements UserDataGateway
         }
         return user;
     }
+
+    @Override
+    public List<Trip> getTripsByUserId(int userId) throws TripNotFoundException {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+
+        List<Trip> trips = new ArrayList<Trip>();
+        try
+        {
+            trips = jdbcTemplate.query("select * from ru_trips where userId = '" + userId + "'", new TripRowMapper());
+        }
+        catch (EmptyResultDataAccessException erdaex)
+        {
+            throw new TripNotFoundException("No trip found with that ID", erdaex);
+        }
+        return trips;
+    }
+
+
 }

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * <h1>History</h1>
  * <h2>is.ru.honn.ruber.domain</h2>
- * <p>A simple POJO represinting a history of trips for a single user.</p>
+ * <p>A simple POJO representing a history of trips for a single user.</p>
  * Created on 24.10.2014.
  *
  * @author jakob
