@@ -1,0 +1,12 @@
+@(driverReviews: java.util.List[is.ru.honn.ruber.domain.Review])
+
+@main(title = "Reviews") {
+
+	@for(review <- driverReviews) {
+		<div class="gesture-item">
+			<h2>@review.getRating()</h2>
+			<p>@review.getComment()</p>
+		</div>
+	}
+
+}

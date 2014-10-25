@@ -16,6 +16,6 @@ import java.util.List;
  */
 public interface DriverService {
     public List<Driver> getDrivers();
-    public Review getDriverReview(int driverId);
+    public List<Review> getDriverReviews(int driverId);
     public void addDriverReview(int driverId, Review review);
 }

@@ -34,7 +34,7 @@ public class DriverServiceData implements DriverService {
     }
 
     @Override
-    public Review getDriverReview(int driverId) {
+    public List<Review> getDriverReviews(int driverId) {
         return null;
     }
 
