@@ -46,13 +46,13 @@ public class TripData extends RuData implements TripDataGateway {
         parameters.put("endLong", trip.getEndLong());
         parameters.put("userId", userId);
 
-        try
-        {
-            insert.execute(parameters);
+        int returnKey = 0;
+        try {
+            returnKey = insert.execute(parameters);
         }
         catch(DataIntegrityViolationException divex)
         {
-            throw new TripExistsException("Trip with ID: " + userId + " already exits", divex);
+            throw new TripExistsException("Trip with ID: " + returnKey + " already exits", divex);
         }
 
     }

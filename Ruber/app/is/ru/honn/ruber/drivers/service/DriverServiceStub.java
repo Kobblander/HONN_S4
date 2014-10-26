@@ -34,10 +34,10 @@ public class DriverServiceStub implements DriverService {
 		return dReviews;
 	}
 
-	@Override
-	public void addDriverReview(int driverId, Review review) {
-		reviews.add(review);
-	}
+    @Override
+    public void addDriverReview(Review review) throws ReviewExistsException {
+
+    }
 
 	@Override
 	public Driver getDriverByID(int driverID) {
@@ -57,7 +57,12 @@ public class DriverServiceStub implements DriverService {
 		return null;
 	}
 
-	public void setDrivers(List<Driver> setDrivers) {
+    @Override
+    public double getAverageRating(int driverId) {
+        return 0;
+    }
+
+    public void setDrivers(List<Driver> setDrivers) {
 		drivers = setDrivers;
 	}
 
