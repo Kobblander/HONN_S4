@@ -20,15 +20,15 @@ public class HistoryController extends UserController {
 
 	public static Result getUserHistory(String userName) {
 		User user = service.getUser(userName);
-		History userH = service.getUserHistory(user.getId(), 0, 3);
+		History userH = service.getUserHistory(user.getId(), 0, 5);
 
 		return ok(history.render(userH));
 	}
 
 	public static Result getTripById(int tripID) {
 		Trip vTrip = service.getTripById(tripID);
-		System.out.println(vTrip);
-		System.out.println(vTrip.getId());
+		if(vTrip == null)
+			return badRequest();
 		return ok(trip.render(vTrip));
 	}
 

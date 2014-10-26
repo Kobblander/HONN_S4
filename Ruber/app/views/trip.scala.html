@@ -22,10 +22,10 @@
 		var endTime = new Date(@trip.getEndTime()*1000);
 		$(".endTime" ).append(endTime);
 
-		var latlonStart = '38.897676,-77.03653';
+		var latlonStart = '@trip.getStartLat(),@trip.getStartLong()';
 		var imgStart = "http://maps.googleapis.com/maps/api/staticmap?center="+latlonStart+"&markers="+latlonStart+"&zoom=13&size=400x300&sensor=true";
 
-		var latlonEnd = '38.871857,-77.056267';
+		var latlonEnd = '@trip.getEndLat(),@trip.getEndLong()';
 		var imgEnd = "http://maps.googleapis.com/maps/api/staticmap?center="+latlonEnd+"&markers="+latlonEnd+"&zoom=13&size=400x300&sensor=true";
 
 
