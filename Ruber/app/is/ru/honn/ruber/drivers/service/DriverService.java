@@ -1,6 +1,7 @@
 package is.ru.honn.ruber.drivers.service;
 
 import is.ru.honn.ruber.domain.Driver;
+import is.ru.honn.ruber.domain.Product;
 import is.ru.honn.ruber.domain.Review;
 
 import java.util.List;
@@ -37,4 +38,6 @@ public interface DriverService {
      * @param review The rewiev to be added.
      */
     public void addDriverReview(int driverId, Review review);
+	public Driver getDriverByID(int driverID);
+	public Product getProductByDriverId(int driverID);
 }

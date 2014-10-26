@@ -1,12 +1,35 @@
-@(driverReviews: java.util.List[is.ru.honn.ruber.domain.Review])
+@(driverReviews: java.util.List[is.ru.honn.ruber.domain.Review], reviewForm: Form[is.ru.honn.ruber.domain.Review], driverID: Int)
+
+@import helper._
 
 @main(title = "Reviews") {
 
 	@for(review <- driverReviews) {
 		<div class="gesture-item">
-			<h2>@review.getRating()</h2>
+			<h3>@review.getRating()</h3>
 			<p>@review.getComment()</p>
 		</div>
 	}
+
+	@helper.form(action = routes.DriverController.review(driverID)) {
+		<fieldset>
+			<legend>Login details</legend>
+			@inputText(
+				reviewForm("rating"),
+				'_label -> "Rating",
+				'_error -> reviewForm.globalError
+			)
+			@inputText(
+				reviewForm("comment"),
+				'_label -> "Comment"
+			)
+		</fieldset>
+
+		<div class="actions">
+			<input type="submit" class="btn primary" value="Submit">
+		</div>
+	}
+
+	<a href="@routes.DriverController.getDrivers()">Back</a>
 
 }

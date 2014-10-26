@@ -6,8 +6,9 @@
     <head>
         <title>Ruber</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+	    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/style.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/jquery-1.11.1.min.js")" type="text/javascript"></script>
     </head>
     <body>
         <div class="topbar">
@@ -17,7 +18,7 @@
                     <ul class="nav">
                         @if(session.get("username")) {
                             <li>
-                                <a href="TODO">Get Driver</a>
+                                <a href="@routes.DriverController.getDrivers()">Get Driver</a>
                             </li>
                             <li>
                                 <a href="">Logout</a>

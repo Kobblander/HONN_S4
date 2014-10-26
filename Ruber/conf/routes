@@ -10,7 +10,8 @@ GET         /login                          controllers.LoginController.blank()
 POST        /login                          controllers.LoginController.login()
 POST        /driver/:driverID/review        controllers.DriverController.review(driverID : Int)
 GET         /driver/:driverID/review        controllers.DriverController.getDriverReviews(driverID : Int)
-GET         /driver
+GET         /driver                         controllers.DriverController.getDrivers()
+GET         /driver/:driverID               controllers.DriverController.getDriver(driverID : Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                   controllers.Assets.at(path="/public", file)
