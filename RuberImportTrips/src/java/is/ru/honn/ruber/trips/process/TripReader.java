@@ -1,5 +1,6 @@
 package is.ru.honn.ruber.trips.process;
 
+import is.ru.honn.ruber.trips.domain.Location;
 import is.ru.honn.ruber.trips.domain.Trip;
 import is.ru.honn.ruber.trips.domain.TripStatus;
 import is.ruframework.http.SimpleHttpRequest;
@@ -12,23 +13,24 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class TripReader
 {
     TripHandler handler;
 
-    public TripReader()
-    {
+    List<Location> locations = new ArrayList<Location>();
+
+    public TripReader() {
     }
 
-    public void setHandler(TripHandler handler)
-    {
+    public void setHandler(TripHandler handler) {
         this.handler = handler;
     }
 
-    public void read(String url) throws ProcessException
-    {
+    public void read(String url) throws ProcessException {
         Logger log = Logger.getAnonymousLogger();
         URL feedUrl = null;
         try
@@ -63,6 +65,10 @@ public class TripReader
                 trip.setRequestTime(Integer.parseInt(jsonTrip.get("request_time").toString()));
                 trip.setStartTime(Integer.parseInt(jsonTrip.get("start_time").toString()));
                 trip.setEndTime(Integer.parseInt(jsonTrip.get("end_time").toString()));
+                trip.setStartLat(locations.get(i).getStartLat());
+                trip.setStartLong(locations.get(i).getStartLong());
+                trip.setEndLat(locations.get(i).getEndLat());
+                trip.setEndLong(locations.get(i).getEndLong());
 
                 handler.addTrip(trip);
             }
@@ -79,11 +85,10 @@ public class TripReader
             throw new ProcessException(tmp, e);
 
         }
-        /*
-        catch(Exception ex)
-        {
-        }
-        */
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
     }
 }
 

@@ -1,5 +1,6 @@
 package is.ru.honn.ruber.trips.data;
 
+import is.ru.honn.ruber.trips.domain.Location;
 import is.ru.honn.ruber.trips.domain.Trip;
 import is.ru.honn.ruber.trips.domain.TripStatus;
 import is.ru.honn.ruber.trips.service.TripExistsException;
@@ -23,6 +24,7 @@ import java.util.*;
  */
 public class TripData extends RuData implements TripDataGateway {
 
+
     @Override
     public void addTrip(int userId, Trip trip) throws TripExistsException {
 
@@ -38,6 +40,10 @@ public class TripData extends RuData implements TripDataGateway {
         parameters.put("distance", trip.getDistance());
         parameters.put("startTime", trip.getStartTime());
         parameters.put("endTime", trip.getEndTime());
+        parameters.put("startLat", trip.getStartLat());
+        parameters.put("startLong", trip.getStartLong());
+        parameters.put("endLat", trip.getEndLat());
+        parameters.put("endLong", trip.getEndLong());
         parameters.put("userId", userId);
 
         try
@@ -67,4 +73,5 @@ public class TripData extends RuData implements TripDataGateway {
         }
         return trips;
     }
+
 }

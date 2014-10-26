@@ -9,5 +9,9 @@ CREATE TABLE ru_trips
   distance float,
   startTime BIGINT,
   endTime BIGINT,
+  startLat BIGINT,
+  startLong BIGINT,
+  endLat BIGINT,
+  endLong BIGINT,
   userId int
 )

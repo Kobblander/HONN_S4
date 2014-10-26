@@ -26,7 +26,130 @@
 
     <bean id="tripService" class="is.ru.honn.ruber.trips.service.TripServiceData" >
         <constructor-arg index="0" ref="tripDataGateway"/>
+        <property name="locations">
+            <list>
+                <ref bean="location1"/>
+                <ref bean="location2"/>
+                <ref bean="location3"/>
+                <ref bean="location4"/>
+                <ref bean="location5"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="location1" class="is.ru.honn.ruber.trips.domain.Location">
+        <property name="startLat">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="38.897676f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="startLong">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="-77.03653f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="endLat">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="38.871857f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="endLong">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="-77.056267f"></constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="location2" class="is.ru.honn.ruber.trips.domain.Location">
+        <property name="startLat">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="63.996136f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="startLong">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="-22.623408f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="endLat">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="64.143033f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="endLong">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="-21.915643f"></constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="location3" class="is.ru.honn.ruber.trips.domain.Location">
+        <property name="startLat">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="40.731018f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="startLong">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="-73.957535f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="endLat">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="42.755942f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="endLong">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="-75.8092041f"></constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="location4" class="is.ru.honn.ruber.trips.domain.Location">
+        <property name="startLat">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="40.731018f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="startLong">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="-73.957535f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="endLat">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="42.7253401f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="endLong">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="25.4833039f"></constructor-arg>
+            </bean>
+        </property>
     </bean>
 
 
+    <bean id="location5" class="is.ru.honn.ruber.trips.domain.Location">
+        <property name="startLat">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="55.5708457f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="startLong">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="13.0180404f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="endLat">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="59.326142f"></constructor-arg>
+            </bean>
+        </property>
+        <property name="endLong">
+            <bean class="java.lang.Double">
+                <constructor-arg index="0" value="17.9875455f"></constructor-arg>
+            </bean>
+        </property>
+    </bean>
 </beans>

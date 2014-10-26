@@ -1,5 +1,6 @@
 package is.ru.honn.ruber.trips.service;
 
+import is.ru.honn.ruber.trips.domain.Location;
 import is.ru.honn.ruber.trips.domain.Trip;
 
 import java.util.ArrayList;
@@ -18,6 +19,11 @@ public class TripServiceStub implements TripService
     @Override
     public List<Trip> getTrips(int userId) {
         return theTrips;
+    }
+
+    @Override
+    public List<Location> getLocations() {
+        return null;
     }
 
 }
