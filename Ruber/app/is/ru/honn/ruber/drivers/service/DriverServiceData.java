@@ -10,7 +10,9 @@ import java.util.logging.Logger;
 /**
  * <h1>DriverServiceData</h1>
  * <h2>is.ru.honn.ruber.drivers.service</h2>
- * <p></p>
+ * <p>This class implements the DriverService and is the link between the controllers
+ * and the database. This function uses the DriverDataGateway to add data
+ * to the database.</p>
  * Created on 24.10.2014.
  *
  * @author jakob
