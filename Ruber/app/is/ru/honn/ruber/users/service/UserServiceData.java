@@ -62,4 +62,19 @@ public class UserServiceData implements UserService
         return history;
     }
 
+	@Override
+	public Trip getTripById(int tripId) {
+		Trip trip = null;
+		try
+		{
+			trip = userDataGateway.getTripById(tripId);
+		}
+		catch (TripNotFoundException e)
+		{
+			String msg = "Trip not found; " + e.getMessage();
+			log.severe(msg);
+		}
+		return trip;
+	}
+
 }

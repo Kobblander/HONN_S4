@@ -6,18 +6,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import is.ru.honn.ruber.domain.Driver;
 import is.ru.honn.ruber.domain.Product;
 import is.ru.honn.ruber.drivers.service.DriverService;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.*;
 import is.ru.honn.ruber.domain.Review;
-import org.json.*;
 import play.libs.Json;
 
-import views.html.reviews;
 import views.html.drivers;
 import views.html.driver;
 

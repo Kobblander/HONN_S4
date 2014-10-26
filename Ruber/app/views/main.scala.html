@@ -19,6 +19,7 @@
                         @if(session.get("username")) {
                             <li>
                                 <a href="@routes.DriverController.getDrivers()">Get Driver</a>
+	                            <a href="@routes.HistoryController.getUserHistory(session.get("username"))">Get History</a>
                             </li>
                             <li>
                                 <a href="">Logout</a>

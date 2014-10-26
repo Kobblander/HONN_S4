@@ -1,6 +1,7 @@
 package is.ru.honn.ruber.users.service;
 
 import is.ru.honn.ruber.domain.History;
+import is.ru.honn.ruber.domain.Trip;
 import is.ru.honn.ruber.domain.User;
 
 import java.util.Date;
@@ -14,4 +15,6 @@ public interface UserService
     public User getUser(String username) throws UserNotFoundException;
 
     public History getUserHistory(int userId, int offset, int limit);
+
+	public Trip getTripById(int tripId);
 }

@@ -1,0 +1,10 @@
+@(history: is.ru.honn.ruber.domain.History)
+
+@main(title = "History") {
+
+	@for(hist <- history.getTrips()) {
+		<div class="historyItem">
+			<a href="@routes.HistoryController.getTripById(hist.getId())"><p>Trip #@hist.getId()</p></a>
+		</div>
+	}
+}

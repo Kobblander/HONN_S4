@@ -19,4 +19,6 @@ public interface UserDataGateway extends RuDataAccess
      * @return Returns a single history object.
      */
     public List<Trip> getTripsByUserId(int userId) throws TripNotFoundException;
+
+	public Trip getTripById(int tripId) throws TripNotFoundException;
 }
