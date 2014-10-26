@@ -45,47 +45,32 @@ public class UserServiceData implements UserService
     }
 
     @Override
-    public History getUserHistory(int userId, int offset, int limit) {
+    public History getUserHistory(int userId, int offset, int limit) throws TripNotFoundException {
         History history = new History(offset, limit, limit);
         List<Trip> trips;
         int start = offset * limit;
         int end = offset * limit + limit;
 
-        try {
-            trips = userDataGateway.getTripsByUserId(userId);
-            if (trips.size() < start || limit > 100 || limit <= 0) {
-                String msg = "The offset and limit parameters into getUsers are invalid. ";
-                log.severe(msg);
-                throw new IllegalArgumentException(msg);
-            }
-            if (end > trips.size() - 1) {
-                end = trips.size() - 1;
-            }
-            trips = trips.subList(start, end);
-            for (Trip t : trips) {
-                history.addTrip(t);
-            }
-        } catch (TripNotFoundException e) {
-            String msg = "Trip not found; " + e.getMessage();
+        trips = userDataGateway.getTripsByUserId(userId);
+        if (trips.size() < start || limit > 100 || limit <= 0) {
+            String msg = "The offset and limit parameters into getUsers are invalid. ";
             log.severe(msg);
+            throw new IllegalArgumentException(msg);
+        }
+        if (end > trips.size() - 1) {
+            end = trips.size() - 1;
+        }
+        trips = trips.subList(start, end);
+        for (Trip t : trips) {
+            history.addTrip(t);
         }
 
         return history;
     }
 
 	@Override
-	public Trip getTripById(int tripId) {
-		Trip trip = null;
-		try
-		{
-			trip = userDataGateway.getTripById(tripId);
-		}
-		catch (TripNotFoundException e)
-		{
-			String msg = "Trip not found; " + e.getMessage();
-			log.severe(msg);
-		}
-		return trip;
+	public Trip getTripById(int tripId) throws TripNotFoundException {
+		return userDataGateway.getTripById(tripId);
 	}
 
 }

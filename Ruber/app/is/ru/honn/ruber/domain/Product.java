@@ -9,7 +9,24 @@ public class Product
 	protected int capacity;
 	protected String image;
 
-	public int getId()
+    public Product(int id, int driverId, String description, String display_name, int capacity, String image) {
+        this.id = id;
+        this.driverId = driverId;
+        this.description = description;
+        this.display_name = display_name;
+        this.capacity = capacity;
+        this.image = image;
+    }
+
+    public Product(int driverId, String description, String display_name, int capacity, String image) {
+        this.driverId = driverId;
+        this.description = description;
+        this.display_name = display_name;
+        this.capacity = capacity;
+        this.image = image;
+    }
+
+    public int getId()
 	{
 		return id;
 	}

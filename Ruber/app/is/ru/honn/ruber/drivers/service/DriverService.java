@@ -22,22 +22,42 @@ public interface DriverService {
      * This function returns a list of all drivers.
      * @return The list of all drivers.
      */
-    public List<Driver> getDrivers();
+    public List<Driver> getDrivers() throws DriverNotFoundException;
 
     /**
      * This function returns all reviews given a drivers id.
      * @param driverId The unique driver id.
      * @return The list of all reviews.
      */
-    public List<Review> getDriverReviews(int driverId);
+    public List<Review> getDriverReviews(int driverId) throws DriverNotFoundException;
 
     /**
      * This function attaches a review to a single driver,
      * given the drivers unique driver id.
-     * @param driverId The unique driver id.
-     * @param review The rewiev to be added.
+     * @param review The review to be added.
      */
-    public void addDriverReview(int driverId, Review review);
-	public Driver getDriverByID(int driverID);
-	public Product getProductByDriverId(int driverID);
+    public void addDriverReview(Review review) throws ReviewExistsException;
+
+    /**
+     * This function returns a single driver given a unique driver id.
+     * @param driverId The unique driver id.
+     * @return Returns the Driver.
+     */
+	public Driver getDriverByID(int driverId) throws DriverNotFoundException;
+
+    /**
+     * This functions returns a product which belongs to a driver.
+     * The product is essentially the product the driver is selling, his
+     * car.
+     * @param driverId The unique driver id.
+     * @return Returns the drivers product.
+     */
+	public Product getProductByDriverId(int driverId) throws ProductNotFoundException;
+
+    /**
+     * This function returns an average rating of one driver.
+     * @param driverId The unique driver id.
+     * @return Returns an average rating.
+     */
+    public double getAverageRating(int driverId) throws DriverNotFoundException;
 }

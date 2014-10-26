@@ -84,10 +84,10 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="driverService" class="is.ru.honn.ruber.drivers.service.DriverServiceStub" >
+    <bean id="driverService" class="is.ru.honn.ruber.drivers.service.DriverServiceData" >
         <!-- Uncomment when using DriverServicData -->
-        <!-- <constructor-arg index="0" ref="driverDataGateway"/> -->
-        <property name="drivers">
+        <constructor-arg index="0" ref="driverDataGateway"/>
+        <!--<property name="drivers">
             <list>
                 <ref bean="mockDriver1"></ref>
                 <ref bean="mockDriver2"></ref>
@@ -106,7 +106,7 @@
                 <ref bean="mockReview3"></ref>
                 <ref bean="mockReview4"></ref>
             </list>
-        </property>
+        </property>-->
     </bean>
 
 

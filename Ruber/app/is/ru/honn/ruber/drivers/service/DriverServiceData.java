@@ -32,27 +32,38 @@ public class DriverServiceData implements DriverService {
     }
 
     @Override
-    public List<Driver> getDrivers() {
-        return null;
+    public List<Driver> getDrivers() throws DriverNotFoundException {
+        return driverDataGateway.getDrivers();
     }
 
     @Override
-    public List<Review> getDriverReviews(int driverId) {
-        return null;
+    public List<Review> getDriverReviews(int driverId) throws DriverNotFoundException{
+        return driverDataGateway.getReviewsByDriverId(driverId);
     }
 
     @Override
-    public void addDriverReview(int driverId, Review review) {
-
+    public void addDriverReview(Review review) throws ReviewExistsException {
+        driverDataGateway.addDriverReview(review);
     }
 
 	@Override
-	public Driver getDriverByID(int driverID) {
-		return null;
+	public Driver getDriverByID(int driverId) throws DriverNotFoundException {
+		return driverDataGateway.getDriverById(driverId);
 	}
 
 	@Override
-	public Product getProductByDriverId(int driverID) {
-		return null;
+	public Product getProductByDriverId(int driverId) throws ProductNotFoundException {
+		return driverDataGateway.getProductByDriverId(driverId);
 	}
+
+    @Override
+    public double getAverageRating(int driverId) throws DriverNotFoundException {
+        List<Review> reviews = driverDataGateway.getReviewsByDriverId(driverId);
+        double result = 0;
+        for (Review r : reviews) {
+            result += r.getRating();
+        }
+        result /= reviews.size();
+        return result;
+    }
 }
