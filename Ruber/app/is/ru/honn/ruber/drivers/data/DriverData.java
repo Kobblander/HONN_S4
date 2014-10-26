@@ -58,7 +58,7 @@ public class DriverData extends RuData implements DriverDataGateway {
 
         Driver driver;
         try {
-            driver = (Driver)jdbcTemplate.query("select * from ru_drivers where driverId = '" + driverId + "'", new DriverRowMapper());
+            driver = (Driver)jdbcTemplate.queryForObject("select * from ru_drivers where id = '" + driverId + "'", new DriverRowMapper());
         } catch (EmptyResultDataAccessException erdaex) {
             String msg = "No driver found with that driver id. ";
             log.severe(msg);
@@ -103,7 +103,7 @@ public class DriverData extends RuData implements DriverDataGateway {
 
         Product product;
         try {
-            product = (Product)jdbcTemplate.query("select * from ru_products where driverId = '" + driverId + "'", new ProductRowMapper());
+            product = (Product)jdbcTemplate.queryForObject("select * from ru_products where driverId = '" + driverId + "'", new ProductRowMapper());
         } catch (EmptyResultDataAccessException erdaex) {
             String msg = "No product for that driver id was found.";
             log.severe(msg);

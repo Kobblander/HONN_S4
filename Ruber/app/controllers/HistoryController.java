@@ -4,6 +4,7 @@ import is.ru.honn.ruber.domain.History;
 import is.ru.honn.ruber.domain.Trip;
 import is.ru.honn.ruber.domain.Price;
 import is.ru.honn.ruber.domain.User;
+import is.ru.honn.ruber.users.service.TripNotFoundException;
 import is.ru.honn.ruber.users.service.UserService;
 import play.mvc.Controller;
 import play.mvc.*;
@@ -20,13 +21,23 @@ public class HistoryController extends UserController {
 
 	public static Result getUserHistory(String userName) {
 		User user = service.getUser(userName);
-		History userH = service.getUserHistory(user.getId(), 0, 5);
+		History userH = null;
+		try {
+			userH = service.getUserHistory(user.getId(), 0, 5);
+		} catch (TripNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		return ok(history.render(userH));
 	}
 
 	public static Result getTripById(int tripID) {
-		Trip vTrip = service.getTripById(tripID);
+		Trip vTrip = null;
+		try {
+			vTrip = service.getTripById(tripID);
+		} catch (TripNotFoundException e) {
+			e.printStackTrace();
+		}
 		if(vTrip == null)
 			return badRequest();
 		return ok(trip.render(vTrip));

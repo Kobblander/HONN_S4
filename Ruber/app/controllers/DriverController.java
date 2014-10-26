@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import is.ru.honn.ruber.domain.Driver;
 import is.ru.honn.ruber.domain.Product;
+import is.ru.honn.ruber.drivers.service.DriverNotFoundException;
 import is.ru.honn.ruber.drivers.service.DriverService;
+import is.ru.honn.ruber.drivers.service.ProductNotFoundException;
+import is.ru.honn.ruber.drivers.service.ReviewExistsException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import play.data.Form;
@@ -53,7 +56,11 @@ public class DriverController extends Controller {
 				return badRequest("Missing parameter [comment]");
 			} else {
 				Review review = new Review(driverID, rating, comment);
-				service.addDriverReview(driverID, review);
+				try {
+					service.addDriverReview(review);
+				} catch (ReviewExistsException e) {
+					e.printStackTrace();
+				}
 				return ok();
 			}
 		}
@@ -75,7 +82,12 @@ public class DriverController extends Controller {
 		ObjectNode jObj = Json.newObject();
 		ArrayNode jArr = jObj.arrayNode();
 
-		List<Review> dReviews = service.getDriverReviews(driverID);
+		List<Review> dReviews = null;
+		try {
+			dReviews = service.getDriverReviews(driverID);
+		} catch (DriverNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		for(Review r : dReviews) {
 			ObjectNode rj = Json.newObject();
@@ -88,15 +100,44 @@ public class DriverController extends Controller {
 		return ok(jArr);
 	}
 
+	public static Result getAverageRating(int driverID) {
+		ObjectNode jObj = Json.newObject();
+		double avgRating = -1;
+		try {
+			avgRating = service.getAverageRating(driverID);
+		} catch (DriverNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		jObj.put("average", avgRating);
+
+		return ok(jObj);
+	}
+
 	public static Result getDrivers() {
-		List<Driver> allDrivers = service.getDrivers();
+		List<Driver> allDrivers = null;
+		try {
+			allDrivers = service.getDrivers();
+		} catch (DriverNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		return ok(drivers.render(allDrivers));
 	}
 
 	public static Result getDriver(int driverID) {
-		Driver driverToView = service.getDriverByID(driverID);
-		Product product = service.getProductByDriverId(driverID);
+		Driver driverToView = null;
+		try {
+			driverToView = service.getDriverByID(driverID);
+		} catch (DriverNotFoundException e) {
+			e.printStackTrace();
+		}
+		Product product = null;
+		try {
+			product = service.getProductByDriverId(driverID);
+		} catch (ProductNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		return ok(driver.render(driverToView, product));
 	}

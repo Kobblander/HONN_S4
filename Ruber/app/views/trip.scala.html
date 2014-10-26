@@ -1,6 +1,6 @@
 @(trip: is.ru.honn.ruber.domain.Trip)
 
-@main(title = "History") {
+@main(title = "Trip") {
 
 	<h2>Trip #@trip.getId()</h2>
 	<p>@trip.getStatus()</p>
@@ -12,19 +12,9 @@
 		<span class="hours"></span><span>:</span><span class="minutes"></span><span>:</span><span class="seconds"></span>
 	</div>
 
-
-
-	<button id="fadeButton">View map</button>
-	<div id="maps" style="display: none">
-		<p>Start of trip:</p>
-		<div id="mapholderStart" class="mapContainer"></div>
-		<p>End of trip:</p>
-		<div id="mapholderEnd" class="mapContainer"></div>
-	</div>
-
-	<script src="http://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?language=en"></script>
 	<script>
-		var timeStart = new Date(@trip.getRequestTime()*1000);
+		var timeStart = new Date(@trip.getStartTime()*1000);
 		$(".startTime" ).append(timeStart);
 		var endTime = new Date(@trip.getEndTime()*1000);
 		$(".endTime" ).append(endTime);
@@ -47,37 +37,34 @@
 		else
 			$(".seconds" ).append(seconds);
 
-		var latlonStart = '@trip.getStartLat(),@trip.getStartLong()';
-		var imgStart = "http://maps.googleapis.com/maps/api/staticmap?center="+latlonStart+"&markers="+latlonStart+"&zoom=13&size=400x300&sensor=true";
 
-		var latlonEnd = '@trip.getEndLat(),@trip.getEndLong()';
-		var imgEnd = "http://maps.googleapis.com/maps/api/staticmap?center="+latlonEnd+"&markers="+latlonEnd+"&zoom=13&size=400x300&sensor=true";
-
-
-		document.getElementById("mapholderStart").innerHTML = "<img src='"+imgStart+"'>";
-		document.getElementById("mapholderEnd").innerHTML = "<img src='"+imgEnd+"'>";
-
-		$("#fadeButton" ).click(function() {
-			$("#maps" ).fadeToggle("slow");
-		})
-
-		var map;
 		function initialize() {
-		var myLatlng = new google.maps.LatLng ( latlonStart ) ;
-		var mapOptions = {
-		zoom : 8,
-		center : myLatlng
-		}
-		map = new google.maps.Map ( document.getElementById ( 'map-canvas' ), mapOptions ) ;
+			/*var startPos = new google.maps.LatLng(@trip.getStartLat(),@trip.getStartLong());
+			var endPos = new google.maps.LatLng(@trip.getEndLat(),@trip.getEndLong());*/
+			var mapOptions = {
+				zoom: 8,
+				center: new google.maps.LatLng(@trip.getStartLat(),@trip.getStartLong())
+			};
+			var map = new google.maps.Map(document.getElementById('map-canvas'),
+				mapOptions);
 
-		//==
+			var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(@trip.getStartLat(),@trip.getStartLong()),
+				map: map,
+				title: 'Start'
+			});
+			var marker2 = new google.maps.Marker({
+				position: new google.maps.LatLng(@trip.getEndLat(),@trip.getEndLong()),
+				map: map,
+				title: 'End'
+			});
 		}
 
-			google.maps.event.addDomListener(window, 'load', initialize);
+		google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
-	<div style="height:300px">
+
+	<div id="maps" style="height:400px;width: 400px">
 		<div id="map-canvas" style="margin:0;padding:0;height:100%"></div>
 	</div>
-
 
 }

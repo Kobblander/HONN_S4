@@ -5,6 +5,7 @@
 	<h2>@driver.getFirstName() @driver.getLastName()</h2>
 
 	<h3>Car: @product.getDescription()</h3>
+	<h4>Service: @product.getDisplay_name()</h4>
 	<img id="carImage" src="@product.getImage()" alt="Car">
 
 	<button id="fadeButton">Add review</button>
@@ -13,12 +14,14 @@
 		<input id="ratingInput" type="number" max="5" min="0" value="rating">
 		<button id="submitReview">Submit</button>
 	</div>
+	<p>Average rating: </p><span id="avgRating"></span>
 	<div id="reviews"></div>
 
 	<script>
 		$(document).ready(function() {
 			function fill() {
 				$("#reviews" ).empty();
+				$("#avgRating" ).empty();
 				$.get("@routes.DriverController.getDriverReviews(driver.getId())",function(data, status) {
 					data.forEach(function(review) {
 						var innerDiv = $("<div class='reviewDiv'></div>");
@@ -27,6 +30,19 @@
 						$("#reviews").append(innerDiv);
 					});
 				});
+
+				$.ajax ({
+					url: '@routes.DriverController.getAverageRating(driver.getId())',
+					type: 'get',
+					success: function(data){
+						console.log(data);
+						$("#avgRating").append(data.average);
+					},
+					error: function(data){
+						console.log(data);
+					}
+				});
+
 			}
 
 			fill();

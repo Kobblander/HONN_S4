@@ -15,3 +15,6 @@ VALUES(4, 'Tesla S', 'UberX', 1, 'http://www.blogcdn.com/www.autoblog.com/media/
 
 INSERT INTO ru_products(capacity, description, display_name, driverId, image)
 VALUES(6, 'Tesla X', 'UberSUV', 2, 'http://images.dailytech.com/nimage/Tesla-Model-X-promo.jpg')
+
+INSERT INTO ru_products(capacity, description, display_name, driverId, image)
+VALUES(3, 'M5A1', 'UberX', 3, 'http://www.robertsarmory.com/m5.jpg')
