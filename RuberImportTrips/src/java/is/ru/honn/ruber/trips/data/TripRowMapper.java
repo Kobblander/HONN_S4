@@ -26,6 +26,10 @@ public class TripRowMapper implements RowMapper<Trip> {
                         TripStatus.values()[rs.getInt(4)],
                         rs.getDouble(5),
                         rs.getLong(6),
-                        rs.getLong(7));
+                        rs.getLong(7),
+                        rs.getDouble(8),
+                        rs.getDouble(9),
+                        rs.getDouble(10),
+                        rs.getDouble(11));
     }
 }

@@ -1,3 +1,5 @@
+DROP TABLE ru_users
+
 CREATE TABLE ru_users
 (
   id int Identity (1, 1) primary key NOT NULL,

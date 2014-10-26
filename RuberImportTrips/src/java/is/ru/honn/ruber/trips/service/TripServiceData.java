@@ -1,5 +1,6 @@
 package is.ru.honn.ruber.trips.service;
 
+import is.ru.honn.ruber.trips.domain.Location;
 import is.ru.honn.ruber.trips.domain.Trip;
 import is.ru.honn.ruber.trips.data.TripDataGateway;
 import is.ruframework.data.RuData;
@@ -22,6 +23,8 @@ public class TripServiceData implements TripService {
 
 
     private Logger log = Logger.getLogger(TripServiceData.class.getName());
+
+    private List<Location> locations = new ArrayList<Location>();
 
     private TripDataGateway tripDataGateway;
 
@@ -50,4 +53,13 @@ public class TripServiceData implements TripService {
         }
         return trips;
     }
+
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
 }

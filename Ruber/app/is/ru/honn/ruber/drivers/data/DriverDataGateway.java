@@ -35,7 +35,6 @@ public interface DriverDataGateway extends RuDataAccess {
 
     /**
      * This function returns a list of nearby drivers
-     * //TODO: DO WE ALSO TAKE AS PARAMETERS LONGITUDE AND LATITUDE OR SOME SHIT??!
      * @return Returns a list of nearby drivers.
      */
     public List<Driver> getDrivers();

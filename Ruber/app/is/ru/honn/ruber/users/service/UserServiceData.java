@@ -9,6 +9,7 @@ import is.ru.honn.ruber.domain.User;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
 public class UserServiceData implements UserService
@@ -46,11 +47,21 @@ public class UserServiceData implements UserService
     @Override
     public History getUserHistory(int userId, int offset, int limit) {
         History history = new History(offset, limit, limit);
+        List<Trip> trips;
         int start = offset * limit;
         int end = offset * limit + limit;
 
         try {
-            List<Trip> trips = userDataGateway.getTripsByUserId(userId).subList(start, end);
+            trips = userDataGateway.getTripsByUserId(userId);
+            if (trips.size() < start || limit > 100 || limit <= 0) {
+                String msg = "The offset and limit parameters into getUsers are invalid. ";
+                log.severe(msg);
+                throw new IllegalArgumentException(msg);
+            }
+            if (end > trips.size() - 1) {
+                end = trips.size() - 1;
+            }
+            trips = trips.subList(start, end);
             for (Trip t : trips) {
                 history.addTrip(t);
             }

@@ -68,14 +68,14 @@ public class UserData extends RuData implements UserDataGateway
     public List<Trip> getTripsByUserId(int userId) throws TripNotFoundException {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
 
-        List<Trip> trips = new ArrayList<Trip>();
+        List<Trip> trips;
         try
         {
             trips = jdbcTemplate.query("select * from ru_trips where userId = '" + userId + "'", new TripRowMapper());
         }
         catch (EmptyResultDataAccessException erdaex)
         {
-            throw new TripNotFoundException("No trip found with that ID", erdaex);
+            throw new TripNotFoundException("No trips were found", erdaex);
         }
         return trips;
     }
