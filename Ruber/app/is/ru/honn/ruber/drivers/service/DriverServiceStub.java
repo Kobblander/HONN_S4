@@ -64,4 +64,8 @@ public class DriverServiceStub implements DriverService {
 	public void setProducts(List<Product> setProducts) {
 		products = setProducts;
 	}
+
+	public void setReviews(List<Review> setReviews) {
+		reviews = setReviews;
+	}
 }

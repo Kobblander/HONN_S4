@@ -56,6 +56,30 @@
         <property name="image" value="http://images.dailytech.com/nimage/Tesla-Model-X-promo.jpg"></property>
     </bean>
 
+    <bean id="mockReview1" class="is.ru.honn.ruber.domain.Review">
+        <property name="comment" value="Nice guy, clean car"></property>
+        <property name="driverId" value="1"></property>
+        <property name="rating" value="5"></property>
+    </bean>
+
+    <bean id="mockReview2" class="is.ru.honn.ruber.domain.Review">
+        <property name="comment" value="Not very chatty"></property>
+        <property name="driverId" value="1"></property>
+        <property name="rating" value="4"></property>
+    </bean>
+
+    <bean id="mockReview3" class="is.ru.honn.ruber.domain.Review">
+        <property name="comment" value="Shitty driver"></property>
+        <property name="driverId" value="2"></property>
+        <property name="rating" value="0"></property>
+    </bean>
+
+    <bean id="mockReview4" class="is.ru.honn.ruber.domain.Review">
+        <property name="comment" value="Bad manners"></property>
+        <property name="driverId" value="2"></property>
+        <property name="rating" value="3"></property>
+    </bean>
+
     <bean id="driverDataGateway" class="is.ru.honn.ruber.drivers.data.DriverData">
         <property name="dataSource" ref="dataSource"/>
     </bean>
@@ -73,6 +97,14 @@
             <list>
                 <ref bean="mockProduct1"></ref>
                 <ref bean="mockProduct2"></ref>
+            </list>
+        </property>
+        <property name="reviews">
+            <list>
+                <ref bean="mockReview1"></ref>
+                <ref bean="mockReview2"></ref>
+                <ref bean="mockReview3"></ref>
+                <ref bean="mockReview4"></ref>
             </list>
         </property>
     </bean>

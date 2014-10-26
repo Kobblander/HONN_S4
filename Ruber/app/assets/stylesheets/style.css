@@ -1,0 +1,12 @@
+#reviews {
+    margin: 12px;
+}
+
+.reviewDiv {
+    margin: 12px;
+}
+
+#carImage {
+    height: 200px;
+    display: block;
+}
