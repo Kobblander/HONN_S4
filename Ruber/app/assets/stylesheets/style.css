@@ -10,3 +10,9 @@
     height: 200px;
     display: block;
 }
+
+#map-canvas {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}

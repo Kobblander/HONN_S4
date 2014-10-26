@@ -4,9 +4,15 @@
 
 	<h2>Trip #@trip.getId()</h2>
 	<p>@trip.getStatus()</p>
-	<h3>Distance: @trip.getDistance()</h3>
+	<h3>Distance: @trip.getDistance() km</h3>
 	<h4 class="startTime">Trip taken at: </h4>
 	<h4 class="endTime">Trip ended at: </h4>
+	<div id="tripTime" style="margin: 10px">
+		<p>Duration of trip</p>
+		<span class="hours"></span><span>:</span><span class="minutes"></span><span>:</span><span class="seconds"></span>
+	</div>
+
+
 
 	<button id="fadeButton">View map</button>
 	<div id="maps" style="display: none">
@@ -16,11 +22,30 @@
 		<div id="mapholderEnd" class="mapContainer"></div>
 	</div>
 
+	<script src="http://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 	<script>
 		var timeStart = new Date(@trip.getRequestTime()*1000);
 		$(".startTime" ).append(timeStart);
 		var endTime = new Date(@trip.getEndTime()*1000);
 		$(".endTime" ).append(endTime);
+
+		var totalTime = (endTime.getTime() - timeStart.getTime())/1000;
+		var hours = Math.floor(totalTime / 3600);
+		totalTime = totalTime - hours * 3600;
+		var minutes = Math.floor(totalTime / 60);
+		var seconds = totalTime - minutes * 60;
+		if(hours < 10)
+			$(".hours" ).append('0'+hours);
+		else
+			$(".hours" ).append(hours);
+		if(minutes < 10)
+			$(".minutes" ).append('0'+minutes);
+		else
+			$(".minutes" ).append(minutes);
+		if(seconds < 10)
+			$(".seconds" ).append('0'+seconds);
+		else
+			$(".seconds" ).append(seconds);
 
 		var latlonStart = '@trip.getStartLat(),@trip.getStartLong()';
 		var imgStart = "http://maps.googleapis.com/maps/api/staticmap?center="+latlonStart+"&markers="+latlonStart+"&zoom=13&size=400x300&sensor=true";
@@ -36,5 +61,23 @@
 			$("#maps" ).fadeToggle("slow");
 		})
 
+		var map;
+		function initialize() {
+		var myLatlng = new google.maps.LatLng ( latlonStart ) ;
+		var mapOptions = {
+		zoom : 8,
+		center : myLatlng
+		}
+		map = new google.maps.Map ( document.getElementById ( 'map-canvas' ), mapOptions ) ;
+
+		//==
+		}
+
+			google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
+	<div style="height:300px">
+		<div id="map-canvas" style="margin:0;padding:0;height:100%"></div>
+	</div>
+
+
 }
