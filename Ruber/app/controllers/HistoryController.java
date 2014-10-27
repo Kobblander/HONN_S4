@@ -37,15 +37,12 @@ public class HistoryController extends UserController {
 	}
 
 	public static Result getTripById(int tripID) {
-		Trip vTrip = null;
+		Trip vTrip;
 		try {
 			vTrip = service.getTripById(tripID);
 		} catch (TripNotFoundException e) {
-			String msg = "Trip not found";
-			log.severe(msg + e.getMessage());
+            return badRequest();
 		}
-		if(vTrip == null)
-			return badRequest();
 		return ok(trip.render(vTrip));
 	}
 

@@ -40,8 +40,8 @@ public class UserData extends RuData implements UserDataGateway
         }
         catch(DataIntegrityViolationException divex) {
             String msg = "No user found with username: " + user.getUsername() + ". ";
-            log.severe(msg);
-            throw new UsernameExistsException(msg + divex.getMessage());
+            log.severe(msg + divex.getMessage());
+            throw new UsernameExistsException(msg, divex);
         }
 
         user.setId(returnKey);
@@ -61,8 +61,8 @@ public class UserData extends RuData implements UserDataGateway
         catch (EmptyResultDataAccessException erdaex)
         {
             String msg = "No user found with username: " + username + ". ";
-            log.severe(msg);
-            throw new UserNotFoundException(msg + erdaex.getMessage());
+            log.severe(msg + erdaex.getMessage());
+            throw new UserNotFoundException(msg, erdaex);
         }
         return user;
     }
@@ -77,7 +77,7 @@ public class UserData extends RuData implements UserDataGateway
         }
         catch (EmptyResultDataAccessException erdaex) {
             String msg = "No trips were found for userID: " + userId + ". ";
-            log.severe(msg);
+            log.severe(msg + erdaex.getMessage());
             throw new TripNotFoundException(msg, erdaex);
         }
         return trips;
@@ -96,7 +96,7 @@ public class UserData extends RuData implements UserDataGateway
 		catch (EmptyResultDataAccessException erdaex)
 		{
             String msg = "No trip was found for tripID: " + tripId + ". ";
-            log.severe(msg);
+            log.severe(msg + erdaex.getMessage());
 			throw new TripNotFoundException("No trip found with ID " + tripId + ". ", erdaex);
 		}
 

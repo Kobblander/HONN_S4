@@ -57,77 +57,54 @@ public class DriverController extends Controller {
 		ObjectNode jObj = Json.newObject();
 		ArrayNode jArr = jObj.arrayNode();
 
-		List<Review> dReviews = null;
+		List<Review> dReviews;
 		try {
 			dReviews = service.getDriverReviews(driverID);
-		} catch (DriverNotFoundException e) {
-			String msg = "Driver not found";
-			log.severe(msg + e.getMessage());
-		}
 
-		for(Review r : dReviews) {
-			ObjectNode rj = Json.newObject();
-			rj.put("rating", r.getRating());
-			rj.put("comment", r.getComment());
-			rj.put("driverId", r.getDriverId());
-			jArr.add(rj);
-		}
+            for(Review r : dReviews) {
+                ObjectNode rj = Json.newObject();
+                rj.put("rating", r.getRating());
+                rj.put("comment", r.getComment());
+                rj.put("driverId", r.getDriverId());
+                jArr.add(rj);
+            }
+
+        } catch (Exception e) {
+            return badRequest();
+        }
 
 		return ok(jArr);
 	}
 
 	public static Result getAverageRating(int driverID) {
 		ObjectNode jObj = Json.newObject();
-		double avgRating = -1;
+		double avgRating;
 		try {
-			avgRating = service.getAverageRating(driverID);
-		}
-		catch (DriverNotFoundException e) {
-			String msg = "Driver not found";
-			log.severe(msg + e.getMessage());
-		}
-
-		jObj.put("average", avgRating);
+            avgRating = service.getAverageRating(driverID);
+            jObj.put("average", avgRating);
+        }
+        catch (Exception e) {
+            return badRequest();
+        }
 
 		return ok(jObj);
 	}
 
 	public static Result getDrivers() {
-		List<Driver> allDrivers = null;
-		try
-		{
-			allDrivers = service.getDrivers();
-		}
-		catch (DriverNotFoundException e)
-		{
-			String msg = "Driver not found";
-			log.severe(msg + e.getMessage());
-		}
+		List<Driver> allDrivers = service.getDrivers();
 
 		return ok(drivers.render(allDrivers));
 	}
 
 	public static Result getDriver(int driverID) {
 		Driver driverToView = null;
-		try
-		{
-			driverToView = service.getDriverByID(driverID);
-		}
-		catch (DriverNotFoundException e)
-		{
-			String msg = "Driver not found";
-			log.severe(msg + e.getMessage());
-		}
-		Product product = null;
-		try
-		{
-			product = service.getProductByDriverId(driverID);
-		}
-		catch (ProductNotFoundException e)
-		{
-			String msg = "Product not found";
-			log.severe(msg + e.getMessage());
-		}
+        Product product;
+        try {
+            driverToView = service.getDriverByID(driverID);
+            product = service.getProductByDriverId(driverID);
+        } catch (Exception e) {
+            return badRequest();
+        }
 
 		return ok(driver.render(driverToView, product));
 	}

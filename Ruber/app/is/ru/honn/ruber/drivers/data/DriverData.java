@@ -52,8 +52,8 @@ public class DriverData extends RuData implements DriverDataGateway {
             driver = (Driver)jdbcTemplate.queryForObject("select * from ru_drivers where id = '" + driverId + "'", new DriverRowMapper());
         } catch (EmptyResultDataAccessException erdaex) {
             String msg = "No driver found with ID: " + driverId + "that driver id. ";
-            log.severe(msg);
-            throw new DriverNotFoundException(msg + erdaex.getMessage());
+            log.severe(msg + erdaex.getMessage());
+            throw new DriverNotFoundException(msg, erdaex);
         }
         return driver;
     }
@@ -67,8 +67,8 @@ public class DriverData extends RuData implements DriverDataGateway {
             reviews = jdbcTemplate.query("select * from ru_reviews where driverId = '" + driverId + "'", new ReviewRowMapper());
         } catch (EmptyResultDataAccessException erdaex) {
             String msg = "No reviews found for driverID: " + driverId + ". ";
-            log.severe(msg);
-            throw new ReviewNotFoundException(msg + erdaex.getMessage());
+            log.severe(msg + erdaex.getMessage());
+            throw new ReviewNotFoundException(msg, erdaex);
         }
         return reviews;
     }
@@ -95,8 +95,8 @@ public class DriverData extends RuData implements DriverDataGateway {
             product = (Product)jdbcTemplate.queryForObject("select * from ru_products where driverId = '" + driverId + "'", new ProductRowMapper());
         } catch (EmptyResultDataAccessException erdaex) {
             String msg = "No product for driverID: " + driverId + " was found.";
-            log.severe(msg);
-            throw new ProductNotFoundException(msg + erdaex.getMessage());
+            log.severe(msg + erdaex.getMessage());
+            throw new ProductNotFoundException(msg, erdaex);
         }
         return product;
     }
