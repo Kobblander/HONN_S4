@@ -8,7 +8,6 @@ import is.ru.honn.ruber.domain.Product;
 import is.ru.honn.ruber.drivers.service.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
-import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.*;
 import is.ru.honn.ruber.domain.Review;
@@ -19,8 +18,6 @@ import views.html.driver;
 
 import java.util.List;
 import java.util.logging.Logger;
-
-import static play.data.Form.form;
 
 /**
  * <h1>DriverController</h1>
@@ -34,38 +31,31 @@ import static play.data.Form.form;
 public class DriverController extends Controller {
 	protected static ApplicationContext ctx = new FileSystemXmlApplicationContext("/conf/DriverService.xml");
 
-	final static Form<Review> reviewForm = form(Review.class);
 	private static Logger log = Logger.getLogger(DriverServiceData.class.getName());
 	final static DriverService service = (DriverService) ctx.getBean("driverService");
 
 	public static Result review(int driverID) {
-		System.out.println(driverID);
-		System.out.println(request().body().asRaw());
-		System.out.println(request().body().toString());
-		System.out.println(request().body().asText());
 		JsonNode json = request().body().asJson();
-		System.out.println(json);
-		if(json == null) {
+		if(json == null)
 			return badRequest("Expecting Json data");
-		} else {
-			String comment = json.findPath("comment").asText();
-			int rating = json.findPath("rating").asInt();
-			if(comment == null) {
-				return badRequest("Missing parameter [comment]");
-			} else {
-				Review review = new Review(driverID, rating, comment);
-				try
-				{
-					service.addDriverReview(review);
-				}
-				catch (ReviewExistsException e)
-				{
-					String msg = "Review not found";
-					log.severe(msg + e.getMessage());
-				}
-				return ok();
-			}
+
+		String comment = json.findPath("comment").asText();
+		int rating = json.findPath("rating").asInt();
+
+		if(comment == null)
+			return badRequest("Missing parameter [comment]");
+
+		Review review = new Review(driverID, rating, comment);
+		try
+		{
+			service.addDriverReview(review);
 		}
+		catch (ReviewExistsException e)
+		{
+			String msg = "Review not found";
+			log.severe(msg + e.getMessage());
+		}
+		return ok();
 	}
 
 	public static Result getDriverReviews(int driverID) {
