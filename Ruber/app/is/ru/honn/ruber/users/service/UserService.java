@@ -14,7 +14,7 @@ public interface UserService
 
     public User getUser(String username) throws UserNotFoundException;
 
-    public History getUserHistory(int userId, int offset, int limit) throws TripNotFoundException;
+    public History getUserHistory(int userId, int offset, int limit);
 
 	public Trip getTripById(int tripId) throws TripNotFoundException;
 }

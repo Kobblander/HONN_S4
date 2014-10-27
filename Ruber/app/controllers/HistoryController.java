@@ -24,14 +24,13 @@ public class HistoryController extends UserController {
 	private static Logger log = Logger.getLogger(UserServiceData.class.getName());
 
 	public static Result getUserHistory(String userName) {
+
 		User user = service.getUser(userName);
 		History userH = null;
-		try
-		{
+		try {
 			userH = service.getUserHistory(user.getId(), 0, 5);
 		}
-		catch (TripNotFoundException e)
-		{
+		catch (TripNotFoundException e) {
 			String msg = "Trip not found";
 			log.severe(msg + e.getMessage());
 		}
@@ -41,11 +40,9 @@ public class HistoryController extends UserController {
 
 	public static Result getTripById(int tripID) {
 		Trip vTrip = null;
-		try
-		{
+		try {
 			vTrip = service.getTripById(tripID);
-		} catch (TripNotFoundException e)
-		{
+		} catch (TripNotFoundException e) {
 			String msg = "Trip not found";
 			log.severe(msg + e.getMessage());
 		}

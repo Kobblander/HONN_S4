@@ -11,7 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
  * @author jakob
  * @version 1.1
  */
-public class ReviewExistsException extends Exception {
+public class ReviewExistsException extends RuntimeException {
 
     public ReviewExistsException() {
     }

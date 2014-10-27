@@ -42,27 +42,22 @@ public class SignupController extends UserController
     {
     }
 
-    if (filledForm.field("username").value().length() < 4)
-    {
+    if (filledForm.field("username").value().length() < 4) {
       filledForm.reject("username", "Display Name must be at least 4 characters");
     }
 
-    if (!filledForm.field("password").value().equals(filledForm.field("repeatPassword").value()))
-    {
+    if (!filledForm.field("password").value().equals(filledForm.field("repeatPassword").value())) {
       filledForm.reject("repeatPassword", "The passwords you entered don't match");
     }
 
-    if (filledForm.field("password").value().length() < 6)
-    {
+    if (filledForm.field("password").value().length() < 6) {
       filledForm.reject("password", "The password is too short");
     }
 
-    if (filledForm.hasErrors())
-    {
+    if (filledForm.hasErrors()) {
       return badRequest(signup.render(filledForm));
     }
-    else
-    {
+    else {
       UserRegistration created = filledForm.get();
       service.userSignup(created.getUsername(),
                          created.getFirstName(),

@@ -22,28 +22,28 @@ public interface DriverService {
      * This function returns a list of all drivers.
      * @return The list of all drivers.
      */
-    public List<Driver> getDrivers() throws DriverNotFoundException;
+    public List<Driver> getDrivers();
 
     /**
      * This function returns all reviews given a drivers id.
      * @param driverId The unique driver id.
      * @return The list of all reviews.
      */
-    public List<Review> getDriverReviews(int driverId) throws DriverNotFoundException;
+    public List<Review> getDriverReviews(int driverId);
 
     /**
      * This function attaches a review to a single driver,
      * given the drivers unique driver id.
      * @param review The review to be added.
      */
-    public void addDriverReview(Review review) throws ReviewExistsException;
+    public void addDriverReview(Review review);
 
     /**
      * This function returns a single driver given a unique driver id.
      * @param driverId The unique driver id.
      * @return Returns the Driver.
      */
-	public Driver getDriverByID(int driverId) throws DriverNotFoundException;
+	public Driver getDriverByID(int driverId);
 
     /**
      * This functions returns a product which belongs to a driver.
@@ -52,12 +52,12 @@ public interface DriverService {
      * @param driverId The unique driver id.
      * @return Returns the drivers product.
      */
-	public Product getProductByDriverId(int driverId) throws ProductNotFoundException;
+	public Product getProductByDriverId(int driverId);
 
     /**
      * This function returns an average rating of one driver.
      * @param driverId The unique driver id.
      * @return Returns an average rating.
      */
-    public double getAverageRating(int driverId) throws DriverNotFoundException;
+    public double getAverageRating(int driverId);
 }

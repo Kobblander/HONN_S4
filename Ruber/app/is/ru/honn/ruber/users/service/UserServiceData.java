@@ -45,13 +45,18 @@ public class UserServiceData implements UserService
     }
 
     @Override
-    public History getUserHistory(int userId, int offset, int limit) throws TripNotFoundException {
+    public History getUserHistory(int userId, int offset, int limit) {
         History history = new History(offset, limit, limit);
         List<Trip> trips;
         int start = offset * limit;
         int end = offset * limit + limit;
 
-        trips = userDataGateway.getTripsByUserId(userId);
+        try {
+            trips = userDataGateway.getTripsByUserId(userId);
+        } catch (TripNotFoundException tnfe) {
+            return history;
+        }
+
         if (trips.size() < start || limit > 100 || limit <= 0) {
             String msg = "The offset and limit parameters into getUsers are invalid. ";
             log.severe(msg);

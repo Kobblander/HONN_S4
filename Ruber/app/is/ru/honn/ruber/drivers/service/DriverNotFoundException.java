@@ -9,7 +9,7 @@ package is.ru.honn.ruber.drivers.service;
  * @author jakob
  * @version 1.1
  */
-public class DriverNotFoundException extends Exception {
+public class DriverNotFoundException extends RuntimeException {
 
     public DriverNotFoundException() {
     }

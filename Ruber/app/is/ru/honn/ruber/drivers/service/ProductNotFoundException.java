@@ -9,7 +9,7 @@ package is.ru.honn.ruber.drivers.service;
  * @author jakob
  * @version 1.1
  */
-public class ProductNotFoundException extends Exception {
+public class ProductNotFoundException extends RuntimeException {
 
     public ProductNotFoundException() {
     }

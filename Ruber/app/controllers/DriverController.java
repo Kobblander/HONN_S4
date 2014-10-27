@@ -54,12 +54,9 @@ public class DriverController extends Controller {
 				return badRequest("Missing parameter [comment]");
 			} else {
 				Review review = new Review(driverID, rating, comment);
-				try
-				{
+				try {
 					service.addDriverReview(review);
-				}
-				catch (ReviewExistsException e)
-				{
+				} catch (ReviewExistsException e) {
 					String msg = "Review not found";
 					log.severe(msg + e.getMessage());
 				}
@@ -74,12 +71,9 @@ public class DriverController extends Controller {
 		ArrayNode jArr = jObj.arrayNode();
 
 		List<Review> dReviews = null;
-		try
-		{
+		try {
 			dReviews = service.getDriverReviews(driverID);
-		}
-		catch (DriverNotFoundException e)
-		{
+		} catch (DriverNotFoundException e) {
 			String msg = "Driver not found";
 			log.severe(msg + e.getMessage());
 		}
@@ -98,12 +92,10 @@ public class DriverController extends Controller {
 	public static Result getAverageRating(int driverID) {
 		ObjectNode jObj = Json.newObject();
 		double avgRating = -1;
-		try
-		{
+		try {
 			avgRating = service.getAverageRating(driverID);
 		}
-		catch (DriverNotFoundException e)
-		{
+		catch (DriverNotFoundException e) {
 			String msg = "Driver not found";
 			log.severe(msg + e.getMessage());
 		}

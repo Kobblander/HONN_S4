@@ -40,7 +40,7 @@ public class UserData extends RuData implements UserDataGateway
         }
         catch(DataIntegrityViolationException divex)
         {
-            throw new UsernameExistsException("User " + user.getUsername() + " already exits", divex);
+            throw new UsernameExistsException("User " + user.getUsername() + " already exits. ", divex);
         }
 
         user.setId(returnKey);
@@ -59,7 +59,7 @@ public class UserData extends RuData implements UserDataGateway
         }
         catch (EmptyResultDataAccessException erdaex)
         {
-            throw new UserNotFoundException("No user found with username: " + username);
+            throw new UserNotFoundException("No user found with username: " + username + ". ");
         }
         return user;
     }
@@ -75,7 +75,7 @@ public class UserData extends RuData implements UserDataGateway
         }
         catch (EmptyResultDataAccessException erdaex)
         {
-            throw new TripNotFoundException("No trips were found", erdaex);
+            throw new TripNotFoundException("No trips were found for that user. ", erdaex);
         }
         return trips;
     }
@@ -92,7 +92,7 @@ public class UserData extends RuData implements UserDataGateway
 		}
 		catch (EmptyResultDataAccessException erdaex)
 		{
-			throw new TripNotFoundException("No trip found with that ID", erdaex);
+			throw new TripNotFoundException("No trip found with ID " + tripId + ". ", erdaex);
 		}
 
 		return trip;
