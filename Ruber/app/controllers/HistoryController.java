@@ -29,10 +29,8 @@ public class HistoryController extends UserController {
 		History userH = null;
 		try {
 			userH = service.getUserHistory(user.getId(), 0, 5);
-		}
-		catch (TripNotFoundException e) {
-			String msg = "Trip not found";
-			log.severe(msg + e.getMessage());
+		} catch (Exception e) {
+            userH = service.getUserHistory(user.getId(), 0, 5);
 		}
 
 		return ok(history.render(userH));

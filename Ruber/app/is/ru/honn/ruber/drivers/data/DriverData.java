@@ -6,16 +6,14 @@ import is.ru.honn.ruber.domain.Review;
 import is.ru.honn.ruber.drivers.service.DriverNotFoundException;
 import is.ru.honn.ruber.drivers.service.ProductNotFoundException;
 import is.ru.honn.ruber.drivers.service.ReviewExistsException;
+import is.ru.honn.ruber.drivers.service.ReviewNotFoundException;
 import is.ruframework.data.RuData;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <h1>DriverData</h1>
@@ -42,14 +40,7 @@ public class DriverData extends RuData implements DriverDataGateway {
         parameters.put("rating", review.getRating());
         parameters.put("comment", review.getComment());
 
-        int returnKey = 0;
-        try {
-                returnKey = insert.executeAndReturnKey(parameters).intValue();
-        }
-        catch (DataIntegrityViolationException divex) {
-            String msg = "Trip with ID: " + returnKey + "aldready exists";
-            throw new ReviewExistsException(msg, divex);
-        }
+        insert.execute(parameters);
     }
 
     @Override
@@ -60,7 +51,7 @@ public class DriverData extends RuData implements DriverDataGateway {
         try {
             driver = (Driver)jdbcTemplate.queryForObject("select * from ru_drivers where id = '" + driverId + "'", new DriverRowMapper());
         } catch (EmptyResultDataAccessException erdaex) {
-            String msg = "No driver found with that driver id. ";
+            String msg = "No driver found with ID: " + driverId + "that driver id. ";
             log.severe(msg);
             throw new DriverNotFoundException(msg + erdaex.getMessage());
         }
@@ -75,9 +66,9 @@ public class DriverData extends RuData implements DriverDataGateway {
         try {
             reviews = jdbcTemplate.query("select * from ru_reviews where driverId = '" + driverId + "'", new ReviewRowMapper());
         } catch (EmptyResultDataAccessException erdaex) {
-            String msg = "No review found with that driver id.";
+            String msg = "No reviews found for driverID: " + driverId + ". ";
             log.severe(msg);
-            throw new DriverNotFoundException(msg + erdaex.getMessage());
+            throw new ReviewNotFoundException(msg + erdaex.getMessage());
         }
         return reviews;
     }
@@ -90,9 +81,7 @@ public class DriverData extends RuData implements DriverDataGateway {
         try {
             drivers = jdbcTemplate.query("select * from ru_drivers", new DriverRowMapper());
         } catch (EmptyResultDataAccessException erdaex) {
-            String msg = "No drivers found.";
-            log.severe(msg);
-            throw new DriverNotFoundException(msg + erdaex.getMessage());
+            drivers = new ArrayList<Driver>();
         }
         return drivers;
     }
@@ -105,7 +94,7 @@ public class DriverData extends RuData implements DriverDataGateway {
         try {
             product = (Product)jdbcTemplate.queryForObject("select * from ru_products where driverId = '" + driverId + "'", new ProductRowMapper());
         } catch (EmptyResultDataAccessException erdaex) {
-            String msg = "No product for that driver id was found.";
+            String msg = "No product for driverID: " + driverId + " was found.";
             log.severe(msg);
             throw new ProductNotFoundException(msg + erdaex.getMessage());
         }

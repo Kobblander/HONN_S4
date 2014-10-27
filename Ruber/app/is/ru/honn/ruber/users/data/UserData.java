@@ -32,15 +32,16 @@ public class UserData extends RuData implements UserDataGateway
         parameters.put("email", user.getEmail());
         parameters.put("registered", new Date());
 
-        int returnKey;
+        int returnKey = 0;
 
         try
         {
             returnKey = insert.executeAndReturnKey(parameters).intValue();
         }
-        catch(DataIntegrityViolationException divex)
-        {
-            throw new UsernameExistsException("User " + user.getUsername() + " already exits. ", divex);
+        catch(DataIntegrityViolationException divex) {
+            String msg = "No user found with username: " + user.getUsername() + ". ";
+            log.severe(msg);
+            throw new UsernameExistsException(msg + divex.getMessage());
         }
 
         user.setId(returnKey);
@@ -59,7 +60,9 @@ public class UserData extends RuData implements UserDataGateway
         }
         catch (EmptyResultDataAccessException erdaex)
         {
-            throw new UserNotFoundException("No user found with username: " + username + ". ");
+            String msg = "No user found with username: " + username + ". ";
+            log.severe(msg);
+            throw new UserNotFoundException(msg + erdaex.getMessage());
         }
         return user;
     }
@@ -69,13 +72,13 @@ public class UserData extends RuData implements UserDataGateway
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
 
         List<Trip> trips;
-        try
-        {
+        try {
             trips = jdbcTemplate.query("select * from ru_trips where userId = '" + userId + "'", new TripRowMapper());
         }
-        catch (EmptyResultDataAccessException erdaex)
-        {
-            throw new TripNotFoundException("No trips were found for that user. ", erdaex);
+        catch (EmptyResultDataAccessException erdaex) {
+            String msg = "No trips were found for userID: " + userId + ". ";
+            log.severe(msg);
+            throw new TripNotFoundException(msg, erdaex);
         }
         return trips;
     }
@@ -92,11 +95,11 @@ public class UserData extends RuData implements UserDataGateway
 		}
 		catch (EmptyResultDataAccessException erdaex)
 		{
+            String msg = "No trip was found for tripID: " + tripId + ". ";
+            log.severe(msg);
 			throw new TripNotFoundException("No trip found with ID " + tripId + ". ", erdaex);
 		}
 
 		return trip;
 	}
-
-
 }

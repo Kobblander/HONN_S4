@@ -36,25 +36,19 @@ public class DriverController extends Controller {
 
 	public static Result review(int driverID) {
 		JsonNode json = request().body().asJson();
-		if(json == null)
-			return badRequest("Expecting Json data");
 
-		String comment = json.findPath("comment").asText();
-		int rating = json.findPath("rating").asInt();
+        if (json == null)
+            return badRequest("Expecting Json data");
 
-		if(comment == null)
-			return badRequest("Missing parameter [comment]");
+        String comment = json.findPath("comment").asText();
+        int rating = json.findPath("rating").asInt();
 
-		Review review = new Review(driverID, rating, comment);
-		try
-		{
-			service.addDriverReview(review);
-		}
-		catch (ReviewExistsException e)
-		{
-			String msg = "Review not found";
-			log.severe(msg + e.getMessage());
-		}
+        if (comment == null)
+            return badRequest("Missing parameter [comment]");
+
+        Review review = new Review(driverID, rating, comment);
+        service.addDriverReview(review);
+
 		return ok();
 	}
 
