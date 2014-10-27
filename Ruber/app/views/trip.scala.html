@@ -9,7 +9,7 @@
 	<h4 class="endTime">Trip ended at: </h4>
 	<div id="tripTime" style="margin: 10px">
 		<p>Duration of trip</p>
-		<span class="hours"></span><span>:</span><span class="minutes"></span><span>:</span><span class="seconds"></span>
+		<span class="hours"></span><span class="hourMark">:</span><span class="minutes"></span><span>:</span><span class="seconds"></span>
 	</div>
 
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?language=en"></script>
@@ -24,19 +24,32 @@
 		totalTime = totalTime - hours * 3600;
 		var minutes = Math.floor(totalTime / 60);
 		var seconds = totalTime - minutes * 60;
-		if(hours < 10)
-			$(".hours" ).append('0'+hours);
-		else
-			$(".hours" ).append(hours);
-		if(minutes < 10)
-			$(".minutes" ).append('0'+minutes);
-		else
-			$(".minutes" ).append(minutes);
-		if(seconds < 10)
-			$(".seconds" ).append('0'+seconds);
-		else
-			$(".seconds" ).append(seconds);
 
+		if(hours > 0) {
+			if(hours < 10)
+			$(".hours").append('0'+hours);
+			else
+			$(".hours").append(hours);
+			if(minutes < 10)
+			$(".minutes").append('0'+minutes);
+			else
+			$(".minutes").append(minutes);
+			if(seconds < 10)
+			$(".seconds").append('0'+seconds);
+			else
+			$(".seconds").append(seconds);
+		}
+		else {
+			$(".hourMark" ).empty();
+			if(minutes < 10)
+				$(".minutes" ).append('0'+minutes);
+			else
+				$(".minutes" ).append(minutes);
+			if(seconds < 10)
+				$(".seconds" ).append('0'+seconds);
+			else
+				$(".seconds" ).append(seconds);
+		}
 
 		function initialize() {
 			/*var startPos = new google.maps.LatLng(@trip.getStartLat(),@trip.getStartLong());

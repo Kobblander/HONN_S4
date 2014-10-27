@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import is.ru.honn.ruber.domain.Driver;
 import is.ru.honn.ruber.domain.Product;
-import is.ru.honn.ruber.drivers.service.DriverNotFoundException;
-import is.ru.honn.ruber.drivers.service.DriverService;
-import is.ru.honn.ruber.drivers.service.ProductNotFoundException;
-import is.ru.honn.ruber.drivers.service.ReviewExistsException;
+import is.ru.honn.ruber.drivers.service.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import play.data.Form;
@@ -21,6 +18,7 @@ import views.html.drivers;
 import views.html.driver;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import static play.data.Form.form;
 
@@ -37,7 +35,7 @@ public class DriverController extends Controller {
 	protected static ApplicationContext ctx = new FileSystemXmlApplicationContext("/conf/DriverService.xml");
 
 	final static Form<Review> reviewForm = form(Review.class);
-
+	private static Logger log = Logger.getLogger(DriverServiceData.class.getName());
 	final static DriverService service = (DriverService) ctx.getBean("driverService");
 
 	public static Result review(int driverID) {
@@ -56,25 +54,18 @@ public class DriverController extends Controller {
 				return badRequest("Missing parameter [comment]");
 			} else {
 				Review review = new Review(driverID, rating, comment);
-				try {
+				try
+				{
 					service.addDriverReview(review);
-				} catch (ReviewExistsException e) {
-					e.printStackTrace();
+				}
+				catch (ReviewExistsException e)
+				{
+					String msg = "Review not found";
+					log.severe(msg + e.getMessage());
 				}
 				return ok();
 			}
 		}
-
-		/*Form<Review> filledForm = reviewForm.bindFromRequest();
-		int rating = Integer.parseInt(filledForm.field("rating").value());
-		String comment = filledForm.field("comment").value();
-		Review review = new Review(driverID, rating, comment);
-
-		service.addDriverReview(driverID, review);
-
-		List<Review> dReviews = service.getDriverReviews(driverID);
-
-		return ok(reviews.render(dReviews, reviewForm, driverID));*/
 	}
 
 	public static Result getDriverReviews(int driverID) {
@@ -83,10 +74,14 @@ public class DriverController extends Controller {
 		ArrayNode jArr = jObj.arrayNode();
 
 		List<Review> dReviews = null;
-		try {
+		try
+		{
 			dReviews = service.getDriverReviews(driverID);
-		} catch (DriverNotFoundException e) {
-			e.printStackTrace();
+		}
+		catch (DriverNotFoundException e)
+		{
+			String msg = "Driver not found";
+			log.severe(msg + e.getMessage());
 		}
 
 		for(Review r : dReviews) {
@@ -103,10 +98,14 @@ public class DriverController extends Controller {
 	public static Result getAverageRating(int driverID) {
 		ObjectNode jObj = Json.newObject();
 		double avgRating = -1;
-		try {
+		try
+		{
 			avgRating = service.getAverageRating(driverID);
-		} catch (DriverNotFoundException e) {
-			e.printStackTrace();
+		}
+		catch (DriverNotFoundException e)
+		{
+			String msg = "Driver not found";
+			log.severe(msg + e.getMessage());
 		}
 
 		jObj.put("average", avgRating);
@@ -116,10 +115,14 @@ public class DriverController extends Controller {
 
 	public static Result getDrivers() {
 		List<Driver> allDrivers = null;
-		try {
+		try
+		{
 			allDrivers = service.getDrivers();
-		} catch (DriverNotFoundException e) {
-			e.printStackTrace();
+		}
+		catch (DriverNotFoundException e)
+		{
+			String msg = "Driver not found";
+			log.severe(msg + e.getMessage());
 		}
 
 		return ok(drivers.render(allDrivers));
@@ -127,16 +130,24 @@ public class DriverController extends Controller {
 
 	public static Result getDriver(int driverID) {
 		Driver driverToView = null;
-		try {
+		try
+		{
 			driverToView = service.getDriverByID(driverID);
-		} catch (DriverNotFoundException e) {
-			e.printStackTrace();
+		}
+		catch (DriverNotFoundException e)
+		{
+			String msg = "Driver not found";
+			log.severe(msg + e.getMessage());
 		}
 		Product product = null;
-		try {
+		try
+		{
 			product = service.getProductByDriverId(driverID);
-		} catch (ProductNotFoundException e) {
-			e.printStackTrace();
+		}
+		catch (ProductNotFoundException e)
+		{
+			String msg = "Product not found";
+			log.severe(msg + e.getMessage());
 		}
 
 		return ok(driver.render(driverToView, product));
