@@ -14,6 +14,15 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import java.util.*;
 
+/**
+ * <h1>UserData</h1>
+ * <h2>is.ru.honn.ruber.users.data</h2>
+ * <p>We added the functionality to get Trips to this class.</p>
+ * Created on 24.10.2014.
+ *
+ * @author jakob
+ * @version 1.1
+ */
 public class UserData extends RuData implements UserDataGateway
 {
     public int addUser(User user)

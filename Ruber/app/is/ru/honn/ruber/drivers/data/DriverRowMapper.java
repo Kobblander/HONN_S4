@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * <h1>DriverRowMapper</h1>
  * <h2>is.ru.honn.ruber.drivers.data</h2>
- * <p>This function maps a single row from the database into a Driver object.</p>
+ * <p>This class maps a single row from the database into a Driver object.</p>
  * Created on 24.10.2014.
  *
  * @author jakob

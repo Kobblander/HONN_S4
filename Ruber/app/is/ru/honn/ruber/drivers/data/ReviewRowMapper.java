@@ -10,7 +10,7 @@ import java.sql.SQLException;
 /**
  * <h1>ReviewRowMapper</h1>
  * <h2>is.ru.honn.ruber.drivers.data</h2>
- * <p></p>
+ * <p>This class maps a single row from the database into a Product object.</p>
  * Created on 26.10.2014.
  *
  * @author jakob

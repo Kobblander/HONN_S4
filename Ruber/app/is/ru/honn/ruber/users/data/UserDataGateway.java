@@ -8,6 +8,15 @@ import is.ruframework.data.RuDataAccess;
 
 import java.util.List;
 
+/**
+ * <h1>UserDataGateway</h1>
+ * <h2>is.ru.honn.ruber.users.data</h2>
+ * <p>We added the functionality to get Trips to this class.</p>
+ * Created on 24.10.2014.
+ *
+ * @author jakob
+ * @version 1.1
+ */
 public interface UserDataGateway extends RuDataAccess
 {
     public int addUser(User user);
