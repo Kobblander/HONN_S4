@@ -9,7 +9,7 @@ package is.ru.honn.ruber.trips.service;
  * @author jakob
  * @version 1.1
  */
-public class TripNotFoundException extends Exception {
+public class TripNotFoundException extends RuntimeException {
 
     /**
      * A constructor which only takes a message as a parameter

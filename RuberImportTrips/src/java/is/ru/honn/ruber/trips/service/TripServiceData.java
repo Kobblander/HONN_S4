@@ -34,23 +34,12 @@ public class TripServiceData implements TripService {
 
     @Override
     public void addTrip(int userId, Trip trip) {
-        try {
-            tripDataGateway.addTrip(userId, trip);
-        } catch (TripExistsException e) {
-            String msg = "Trip already exists: " + e.getMessage();
-            log.severe(msg);
-        }
+        tripDataGateway.addTrip(userId, trip);
     }
 
     @Override
     public List<Trip> getTrips(int userId) {
-        List<Trip> trips = new ArrayList<Trip>();
-        try {
-            trips = tripDataGateway.getTripsById(userId);
-        } catch (TripNotFoundException e) {
-            String msg = "Trip not found: " + e.getMessage();
-            log.severe(msg);
-        }
+        List<Trip> trips = tripDataGateway.getTripsById(userId);
         return trips;
     }
 
