@@ -9,7 +9,8 @@ public class Product
 	protected int capacity;
 	protected String image;
 
-    public Product(int id, int driverId, String description, String display_name, int capacity, String image) {
+	//region Constructors
+	public Product(int id, int driverId, String description, String display_name, int capacity, String image) {
         this.id = id;
         this.driverId = driverId;
         this.description = description;
@@ -25,8 +26,10 @@ public class Product
         this.capacity = capacity;
         this.image = image;
     }
+	//endregion
 
-    public int getId()
+	//region Getters and setters
+	public int getId()
 	{
 		return id;
 	}
@@ -85,6 +88,7 @@ public class Product
 	{
 		this.image = image;
 	}
+	//endregion
 
 	@Override
 	public String toString()

@@ -18,7 +18,8 @@ public class Driver {
     private String password;
     private String email;
 
-    public Driver() {
+	//region Constructors
+	public Driver() {
     }
 
     public Driver(int id, String username, String firstName, String lastName, String password, String email) {
@@ -37,8 +38,10 @@ public class Driver {
         this.password = password;
         this.email = email;
     }
+	//endregion
 
-    public int getId() {
+	//region Getters and setters
+	public int getId() {
         return id;
     }
 
@@ -85,6 +88,7 @@ public class Driver {
     public void setEmail(String email) {
         this.email = email;
     }
+	//endregion
 
     @Override
     public String toString() {

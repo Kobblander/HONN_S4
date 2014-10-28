@@ -14,7 +14,8 @@ public class Trip
     protected double endLat;
     protected double endLong;
 
-    public Trip()
+	//region Constructors
+	public Trip()
     {
 
     }
@@ -45,8 +46,10 @@ public class Trip
         this.endLat = endLat;
         this.endLong = endLong;
     }
+	//endregion
 
-    public int getId()
+	//region Getters and setters
+	public int getId()
     {
         return id;
     }
@@ -147,6 +150,7 @@ public class Trip
     public void setEndLong(double endLong) {
         this.endLong = endLong;
     }
+	//endregion
 
     @Override
     public String toString() {
