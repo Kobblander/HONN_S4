@@ -25,7 +25,7 @@ public class TripImportProcess extends RuAbstractProcess implements TripHandler
 {
     TripService tripService;
     TripReader reader = new TripReader();
-    Logger log = Logger.getAnonymousLogger();
+    Logger log = Logger.getLogger(TripImportProcess.class.getName());
 
     @Override
     public void beforeProcess()
@@ -55,17 +55,6 @@ public class TripImportProcess extends RuAbstractProcess implements TripHandler
     @Override
     public void afterProcess()
     {
-        List<Trip> trips = new ArrayList<Trip>();
-        try {
-            tripService.getTrips(1);
-        } catch (Exception e) {
-            log.severe("An error occured when getting trips.");
-            trips.clear();
-        }
-        for(Trip trip : trips)
-        {
-            System.out.println(trip);
-        }
     }
 
     @Override

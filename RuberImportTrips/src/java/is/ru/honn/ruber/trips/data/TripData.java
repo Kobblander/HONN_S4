@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * <h1>TripData</h1>
@@ -24,6 +25,7 @@ import java.util.*;
  */
 public class TripData extends RuData implements TripDataGateway {
 
+    private Logger log = Logger.getLogger(TripData.class.getName());
 
     @Override
     public void addTrip(int userId, Trip trip) throws TripExistsException {
@@ -52,7 +54,9 @@ public class TripData extends RuData implements TripDataGateway {
         }
         catch(DataIntegrityViolationException divex)
         {
-            throw new TripExistsException("Trip with ID: " + returnKey + " already exits", divex);
+            String msg = "Trip with ID: " + returnKey + " already exits";
+            log.severe(msg + divex.getMessage());
+            throw new TripExistsException(msg, divex);
         }
 
     }
@@ -69,7 +73,9 @@ public class TripData extends RuData implements TripDataGateway {
         }
         catch (EmptyResultDataAccessException erdaex)
         {
-            throw new TripNotFoundException("No trip found with that ID", erdaex);
+            String msg = "No trips found for that userID. ";
+            log.severe(msg + erdaex.getMessage());
+            throw new TripNotFoundException(msg, erdaex);
         }
         return trips;
     }

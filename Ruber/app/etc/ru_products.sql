@@ -18,3 +18,9 @@ VALUES(6, 'Tesla X', 'UberSUV', 2, 'http://images.dailytech.com/nimage/Tesla-Mod
 
 INSERT INTO ru_products(capacity, description, display_name, driverId, image)
 VALUES(3, 'M5A1', 'UberX', 3, 'http://www.robertsarmory.com/m5.jpg')
+
+INSERT INTO ru_products(capacity, description, display_name, driverId, image)
+VALUES(4, 'Skoda Octavia', 'UberX', 4, 'http://cdn.carbuyer.co.uk/sites/carbuyer_d7/files/jato_uploaded/skoda-octavia-2013-front-quarter-cornering.jpg')
+
+INSERT INTO ru_products(capacity, description, display_name, driverId, image)
+VALUES(4, 'Honda Accord', 'UberX', 5, 'http://srv2.betterparts.org/images/honda-ac-x-02.jpg')

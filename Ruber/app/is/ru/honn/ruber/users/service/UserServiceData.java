@@ -62,6 +62,11 @@ public class UserServiceData implements UserService
             log.severe(msg);
             throw new IllegalArgumentException(msg);
         }
+
+        if (trips.size() == 0) {
+            return history;
+        }
+
         if (end > trips.size() - 1) {
             end = trips.size() - 1;
         }
