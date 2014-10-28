@@ -10,7 +10,7 @@ package is.ru.honn.ruber.trips.service;
  * @author jakob
  * @version 1.1
  */
-public class TripExistsException extends Exception {
+public class TripExistsException extends RuntimeException {
 
     /**
      * A constructor which only takes a message as a parameter
@@ -29,5 +29,4 @@ public class TripExistsException extends Exception {
     public TripExistsException(String message, Throwable cause) {
         super(message, cause);
     }
-
 }

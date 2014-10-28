@@ -55,7 +55,13 @@ public class TripImportProcess extends RuAbstractProcess implements TripHandler
     @Override
     public void afterProcess()
     {
-        List<Trip> trips = tripService.getTrips(1);
+        List<Trip> trips = new ArrayList<Trip>();
+        try {
+            tripService.getTrips(1);
+        } catch (Exception e) {
+            log.severe("An error occured when getting trips.");
+            trips.clear();
+        }
         for(Trip trip : trips)
         {
             System.out.println(trip);
@@ -65,6 +71,10 @@ public class TripImportProcess extends RuAbstractProcess implements TripHandler
     @Override
     public void addTrip(Trip trip)
     {
-        tripService.addTrip(1, trip);
+        try {
+            tripService.addTrip(1, trip);
+        } catch (Exception e) {
+            log.severe("An error occurred when adding a trip.");
+        }
     }
 }

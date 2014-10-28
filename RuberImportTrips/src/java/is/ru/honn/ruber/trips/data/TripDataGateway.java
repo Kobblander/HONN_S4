@@ -22,12 +22,12 @@ public interface TripDataGateway extends RuDataAccess {
      * @param userId The user ID.
      * @param trip The trip to be added.
      */
-    public void addTrip(int userId, Trip trip) throws TripExistsException;
+    public void addTrip(int userId, Trip trip);
 
     /**
      * Returns a single trip given a userId.
      * @param userId The user ID.
      * @return Returns a single trip.
      */
-    public List<Trip> getTripsById(int userId) throws TripNotFoundException;
+    public List<Trip> getTripsById(int userId);
 }
