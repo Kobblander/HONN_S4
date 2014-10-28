@@ -2,7 +2,7 @@
 
 @main(title = driver.getFirstName()) {
 
-	<h2>@driver.getFirstName() @driver.getLastName()</h2>
+	<h2 class="listH2">@driver.getFirstName() @driver.getLastName()</h2>
 
 	<h3>Car: @product.getDescription()</h3>
 	<h4>Service: @product.getDisplay_name()</h4>
@@ -10,7 +10,7 @@
 
 	<button id="fadeButton">Add review</button>
 	<div id="addReview" style="display: none">
-		<input id="commentInput" type="text" value="comment">
+		<<textarea rows="4" cols="50" id="commentInput" type="text" value="comment"></textarea>
 		<input id="ratingInput" type="number" max="5" min="0" value="rating">
 		<button id="submitReview">Submit</button>
 	</div>

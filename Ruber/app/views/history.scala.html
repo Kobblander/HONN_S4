@@ -2,9 +2,24 @@
 
 @main(title = "History") {
 
-	@for(hist <- history.getTrips()) {
-		<div class="historyItem">
-			<a href="@routes.HistoryController.getTripById(hist.getId())"><p>Trip #@hist.getId()</p></a>
-		</div>
-	}
+	<p>Number of trips to view:</p>
+	<input id="tripViews" type="number" max="100" min="1" value="rating">
+	<button id="tripButton">Set</button>
+
+
+	<div class="listItem">
+		<h2 class="listH2">Trip history</h2>
+		<ul class="listUl">
+		@for(hist <- history.getTrips()) {
+			<li class="listLi"><a href="@routes.HistoryController.getTripById(hist.getId())"><span>Trip #@hist.getId()</span></a></li>
+		}
+		</ul>
+	</div>
+
+	<script>
+		$('#tripButton').click( function() {
+			var number = $("#tripViews").val();
+			window.location.href = '/history/@session.get("username")/'+number;
+		})
+	</script>
 }
