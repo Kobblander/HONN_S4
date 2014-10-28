@@ -11,12 +11,12 @@ import java.util.*;
 import java.util.logging.Logger;
 
 /**
- * <h1>RidesData</h1>
+ * <h1>TripServiceData</h1>
  * <h2>is.ru.honn.ruber.rides.service</h2>
- * <p></p>
+ * <p>This class calls the TripDataGateway to add stuff to the database.</p>
  * Created on 24.10.2014.
  *
- * @author jakob
+ * @author jakob, steinar
  * @version 1.1
  */
 public class TripServiceData implements TripService {

@@ -3,7 +3,7 @@ package is.ru.honn.ruber.trips.service;
 /**
  * <h1>TripNotFoundException</h1>
  * <h2>is.ru.honn.ruber.trips.service</h2>
- * <p></p>
+ * <p>A simple exception which is thrown when a trip is not found.</p>
  * Created on 25.10.2014.
  *
  * @author jakob
@@ -11,18 +11,22 @@ package is.ru.honn.ruber.trips.service;
  */
 public class TripNotFoundException extends Exception {
 
-    public TripNotFoundException() {
-    }
-
+    /**
+     * A constructor which only takes a message as a parameter
+     * @param message The message of the error.
+     */
     public TripNotFoundException(String message) {
         super(message);
     }
 
+    /**
+     * A constructor which both takes a message as a parameter and another
+     * throwable cause.
+     * @param message The message of the error.
+     * @param cause Another throwable cause.
+     */
     public TripNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public TripNotFoundException(Throwable cause) {
-        super(cause);
-    }
 }

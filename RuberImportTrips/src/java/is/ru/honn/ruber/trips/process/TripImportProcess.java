@@ -11,6 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * <h1>TripImportProcess</h1>
+ * <p>This process extends the ru-framework RuAbstractProcess and is a process in the context of the
+ * ru-framework.</p>
+ * <p>This class is the receiving end of the <em>"hollywood principle"</em> in this project. This class is a handler
+ * for JSONReaders and processes Trips for them by sending them forward to the Ruber Service.</p>
+ *
+ * @author jakob, steinar, teacher.
+ * Created on 27.9.2014.
+ */
 public class TripImportProcess extends RuAbstractProcess implements TripHandler
 {
     TripService tripService;

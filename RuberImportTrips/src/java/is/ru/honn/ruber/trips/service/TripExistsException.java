@@ -12,18 +12,22 @@ package is.ru.honn.ruber.trips.service;
  */
 public class TripExistsException extends Exception {
 
-    public TripExistsException() {
-    }
-
+    /**
+     * A constructor which only takes a message as a parameter
+     * @param message The message of the error.
+     */
     public TripExistsException(String message) {
         super(message);
     }
 
+    /**
+     * A constructor which both takes a message as a parameter and another
+     * throwable cause.
+     * @param message The message of the error.
+     * @param cause Another throwable cause.
+     */
     public TripExistsException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public TripExistsException(Throwable cause) {
-        super(cause);
-    }
 }

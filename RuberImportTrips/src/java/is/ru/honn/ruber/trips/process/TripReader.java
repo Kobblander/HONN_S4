@@ -17,6 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * <h1>TripReader</h1>
+ * <h2>is.ru.honn.ruber.drivers.process</h2>
+ * <p>We changed this class around to fit our needs. It now adds mock locations from our bean.</p>
+ * Created on 24.10.2014.
+ *
+ * @version 1.1
+ */
 public class TripReader
 {
     TripHandler handler;
