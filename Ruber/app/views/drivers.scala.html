@@ -6,8 +6,7 @@
 		<h2 class="listH2">Available drivers</h2>
 		<ul class="listUl">
 			@for(driver <- drivers) {
-				<li class="listLi"><span>@driver.getFirstName() @driver.getLastName()</span></li>
-				<a href="@routes.DriverController.getDriver(driver.getId())">View info</a>
+				<li class="listLi"><span><a href="@routes.DriverController.getDriver(driver.getId())">@driver.getFirstName() @driver.getLastName()</a></span></li>
 			}
 		</ul>
 	</div>

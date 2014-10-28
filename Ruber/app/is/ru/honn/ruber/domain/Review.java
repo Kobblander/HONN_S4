@@ -17,7 +17,8 @@ public class Review {
     private int rating;
     private String comment;
 
-    public Review() {
+	//region Constructors
+	public Review() {
     }
 
     public Review(int id, int driverId, int rating, String comment) {
@@ -32,8 +33,10 @@ public class Review {
         this.rating = rating;
         this.comment = comment;
     }
+	//endregion
 
-    public int getId() {
+	//region Getters and setters
+	public int getId() {
         return id;
     }
 
@@ -64,6 +67,7 @@ public class Review {
     public void setComment(String comment) {
         this.comment = comment;
     }
+	//endregion
 
     @Override
     public String toString() {
