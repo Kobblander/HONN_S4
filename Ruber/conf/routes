@@ -12,7 +12,7 @@ POST        /driver/:driverID/review        controllers.DriverController.review(
 GET         /driver/:driverID/review        controllers.DriverController.getDriverReviews(driverID : Int)
 GET         /driver                         controllers.DriverController.getDrivers()
 GET         /driver/:driverID               controllers.DriverController.getDriver(driverID : Int)
-GET         /history/:userName              controllers.HistoryController.getUserHistory(userName : String)
+GET         /history/:userName/:number      controllers.HistoryController.getUserHistory(userName : String, number : Int)
 GET         /history/trip/:tripId           controllers.HistoryController.getTripById(tripId : Int)
 GET         /driver/:driverID/average       controllers.DriverController.getAverageRating(driverID : Int)
 

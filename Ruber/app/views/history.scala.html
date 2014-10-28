@@ -2,9 +2,20 @@
 
 @main(title = "History") {
 
+	<p>Number of trips to view:</p>
+	<input id="tripViews" type="number" max="100" min="1" value="rating">
+	<button id="tripButton">Set</button>
+
 	@for(hist <- history.getTrips()) {
 		<div class="historyItem">
 			<a href="@routes.HistoryController.getTripById(hist.getId())"><p>Trip #@hist.getId()</p></a>
 		</div>
 	}
+
+	<script>
+		$('#tripButton').click( function() {
+			var number = $("#tripViews").val();
+			window.location.href = '/history/@session.get("username")/'+number;
+		})
+	</script>
 }
