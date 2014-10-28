@@ -11,6 +11,13 @@ package is.ru.honn.ruber.users.service;
  */
 public class TripNotFoundException extends RuntimeException {
 
+
+    /**
+     * An empty constructor.
+     */
+    public TripNotFoundException() {
+    }
+
     /**
      * A constructor which only takes a message as a parameter
      * @param message The message of the error.

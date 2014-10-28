@@ -14,6 +14,12 @@ import org.springframework.dao.DataIntegrityViolationException;
 public class ReviewExistsException extends RuntimeException {
 
     /**
+     * An empty constructor.
+     */
+    public ReviewExistsException() {
+    }
+
+    /**
      * A constructor which only takes a message as a parameter
      * @param message The message of the error.
      */

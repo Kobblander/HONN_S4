@@ -11,6 +11,13 @@ package is.ru.honn.ruber.drivers.service;
  */
 public class DriverNotFoundException extends RuntimeException {
 
+
+    /**
+     * An empty constructor.
+     */
+    public DriverNotFoundException() {
+    }
+
     /**
      * A constructor which only takes a message as a parameter
      * @param message The message of the error.

@@ -12,6 +12,12 @@ package is.ru.honn.ruber.drivers.service;
 public class ProductNotFoundException extends RuntimeException {
 
     /**
+     * An empty constructor.
+     */
+    public ProductNotFoundException() {
+    }
+
+    /**
      * A constructor which only takes a message as a parameter
      * @param message The message of the error.
      */

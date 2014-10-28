@@ -3,6 +3,14 @@ package is.ru.honn.ruber.users.service;
 
 public class UsernameExistsException extends RuntimeException
 {
+
+
+    /**
+     * An empty constructor.
+     */
+    public UsernameExistsException() {
+    }
+
     /**
      * A constructor which only takes a message as a parameter
      * @param message The message of the error.
