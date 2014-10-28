@@ -2,12 +2,14 @@
 
 @main(title = "Drivers") {
 
-	@for(driver <- drivers) {
-		<div class="gesture-item">
-			<h3>@driver.getFirstName() @driver.getLastName()</h3>
-			<h4>@driver.getEmail()</h4>
-		</div>
-		<a href="@routes.DriverController.getDriver(driver.getId())">View info</a>
-	}
+	<div class="listItem">
+		<h2 class="listH2">Available drivers</h2>
+		<ul class="listUl">
+			@for(driver <- drivers) {
+				<li class="listLi"><span>@driver.getFirstName() @driver.getLastName()</span></li>
+				<a href="@routes.DriverController.getDriver(driver.getId())">View info</a>
+			}
+		</ul>
+	</div>
 
 }

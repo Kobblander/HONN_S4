@@ -1,3 +1,171 @@
+@import url(http://fonts.googleapis.com/css?family=Capriola);
+
+html,
+body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+
+
+
+.span14 {
+    padding:10px;
+    padding-bottom:60px;   /* Height of the footer */
+}
+
+
+
+#cssmenu,
+#cssmenu ul,
+#cssmenu ul li,
+#cssmenu ul li a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    line-height: 1;
+    display: block;
+    position: relative;
+    font-family: Capriola, Helvetica, sans-serif;
+}
+#cssmenu {
+    width: auto;
+    height: 59px;
+    padding-bottom: 4px;
+}
+#cssmenu.align-right {
+    float: right;
+}
+#cssmenu.align-right ul li {
+    float: right;
+    margin-right: 0;
+    margin-left: 4px;
+}
+#cssmenu.align-right ul li:first-child,
+#cssmenu.align-right ul li:first-child > a {
+    border-bottom-right-radius: 3px;
+}
+#cssmenu #bg-one,
+#cssmenu #bg-two,
+#cssmenu #bg-three,
+#cssmenu #bg-four {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+#cssmenu #bg-one {
+    height: 10px;
+    background: #0f71ba;
+}
+#cssmenu #bg-two {
+    height: 59px;
+    z-index: 2;
+    background: url('images/bg.png');
+}
+#cssmenu #bg-three {
+    bottom: 4px;
+    height: 55px;
+    z-index: 3;
+    background: #222222;
+    background: -moz-linear-gradient(top, #555555 0%, #222222 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #555555), color-stop(100%, #222222));
+    background: -webkit-linear-gradient(top, #555555 0%, #222222 100%);
+    background: -o-linear-gradient(top, #555555 0%, #222222 100%);
+    background: -ms-linear-gradient(top, #555555 0%, #222222 100%);
+    background: linear-gradient(to bottom, #555555 0%, #222222 100%);
+}
+#cssmenu #bg-four {
+    bottom: 4px;
+    height: 55px;
+    z-index: 4;
+    background: url('images/bg.png');
+}
+#cssmenu ul {
+    height: 59px;
+}
+#cssmenu ul li {
+    float: left;
+    margin-right: 4px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    z-index: 5;
+}
+#cssmenu ul li a {
+    padding: 24px 30px 20px 30px;
+    margin-bottom: 4px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #eeeeee;
+    font-size: 15px;
+    text-decoration: none;
+}
+#cssmenu ul li:first-child,
+#cssmenu ul li:first-child > a {
+    border-bottom-left-radius: 3px;
+}
+#cssmenu ul li:hover,
+#cssmenu ul li.active {
+    background: #0f71ba;
+    background: -moz-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3fa4f0), color-stop(100%, #0f71ba));
+    background: -webkit-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+    background: -o-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+    background: -ms-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+    background: linear-gradient(to bottom, #3fa4f0 0%, #0f71ba 100%);
+}
+#cssmenu ul li a:hover,
+#cssmenu ul li.active > a {
+    background: url('images/bg.png');
+    color: #ffffff;
+}
+
+
+.listItem {
+    width: 60%;
+}
+
+.listH2 {
+    font: 400 40px/1.5 Helvetica, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.listUl {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.listLi {
+    font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+.listLi:last-child {
+    border: none;
+}
+
+.listLi span {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    width: 100%;
+
+    -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+    -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+    -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+    -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+    transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+
+.listLi span:hover {
+    font-size: 30px;
+    background: #f6f6f6;
+}
+
+
 #reviews {
     margin: 12px;
 }
@@ -15,4 +183,49 @@
     margin: 0;
     padding: 0;
     height: 100%;
+}
+
+footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:25px;   /* Height of the footer */
+}
+
+.imgList * {margin: 0; padding: 0;}
+
+.imgList {
+    margin: 20px;
+}
+
+.imgListUl {
+    list-style-type: none;
+    width: 500px;
+}
+
+.imgListH3 {
+    font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+.imgListLi img {
+    float: left;
+    margin: 0 15px 0 0;
+}
+
+.imgListLi p {
+    font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+
+.imgListLi {
+    padding: 10px;
+    overflow: auto;
+}
+
+.imgListLi:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
+#ratingInput {
+    display: block;
 }

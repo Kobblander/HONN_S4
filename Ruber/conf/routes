@@ -13,7 +13,7 @@ GET         /driver/:driverID/review        controllers.DriverController.getDriv
 GET         /driver                         controllers.DriverController.getDrivers()
 GET         /driver/:driverID               controllers.DriverController.getDriver(driverID : Int)
 GET         /history/:userName/:number      controllers.HistoryController.getUserHistory(userName : String, number : Int)
-GET         /history/trip/:tripId           controllers.HistoryController.getTripById(tripId : Int)
+GET         /history/:tripId                controllers.HistoryController.getTripById(tripId : Int)
 GET         /driver/:driverID/average       controllers.DriverController.getAverageRating(driverID : Int)
 
 # Map static resources from the /public folder to the /assets URL path
