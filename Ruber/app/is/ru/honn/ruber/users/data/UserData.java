@@ -68,7 +68,7 @@ public class UserData extends RuData implements UserDataGateway
     }
 
     @Override
-    public List<Trip> getTripsByUserId(int userId) throws TripNotFoundException {
+    public List<Trip> getTripsByUserId(int userId) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
 
         List<Trip> trips;
@@ -84,7 +84,7 @@ public class UserData extends RuData implements UserDataGateway
     }
 
 	@Override
-	public Trip getTripById(int tripId) throws TripNotFoundException {
+	public Trip getTripById(int tripId) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
 
 		Trip trip;
@@ -97,7 +97,7 @@ public class UserData extends RuData implements UserDataGateway
 		{
             String msg = "No trip was found for tripID: " + tripId + ". ";
             log.severe(msg + erdaex.getMessage());
-			throw new TripNotFoundException("No trip found with ID " + tripId + ". ", erdaex);
+			throw new TripNotFoundException(msg, erdaex);
 		}
 
 		return trip;

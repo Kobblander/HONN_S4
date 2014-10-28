@@ -14,7 +14,7 @@ import java.util.List;
  * unique driver id or you can post a review about a driver.</p>
  * Created on 24.10.2014.
  *
- * @author jakob
+ * @author jakob, steinar
  * @version 1.1
  */
 public interface DriverService {

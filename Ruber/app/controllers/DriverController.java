@@ -22,10 +22,15 @@ import java.util.logging.Logger;
 /**
  * <h1>DriverController</h1>
  * <h2>controllers</h2>
- * <p></p>
+ * <p>This class is a Driver controller. It handles restful /GET requests sent with the
+ * /driver/ path and it initiates responses back toward the caller. Controllers are essentially the glue between
+ * the domain logic of the application and the transport layer events received as html requests.</p>
+ *
+ * <p>This class can add reviews, get all reviews for a specific driver, get the avarage rating of a driver,
+ * and get both a single and multiple drivers.</p>
  * Created on 24.10.2014.
  *
- * @author jakob
+ * @author jakob, steinar
  * @version 1.1
  */
 public class DriverController extends Controller {
@@ -34,7 +39,13 @@ public class DriverController extends Controller {
 	private static Logger log = Logger.getLogger(DriverServiceData.class.getName());
 	final static DriverService service = (DriverService) ctx.getBean("driverService");
 
-	public static Result review(int driverID) {
+    /**
+     * This function creates a new review for a driver. It receives it as json content
+     * from the request. It returns 200 OK if it was successful.
+     * @param driverID The given drivers id.
+     * @return
+     */
+ 	public static Result review(int driverID) {
 		JsonNode json = request().body().asJson();
 
         if (json == null)
@@ -52,6 +63,12 @@ public class DriverController extends Controller {
 		return ok();
 	}
 
+    /**
+     * This function returns all reviews for a single driver. It returns it
+     * as JSON content within a OK 200 response.
+     * @param driverID The given drivers id.
+     * @return Returns a 200 response with driver reviews JSON content.
+     */
 	public static Result getDriverReviews(int driverID) {
 
 		ObjectNode jObj = Json.newObject();
@@ -76,6 +93,12 @@ public class DriverController extends Controller {
 		return ok(jArr);
 	}
 
+    /**
+     * This function returns the average rating of a driver as JSON content within a
+     * 200 OK response body.
+     * @param driverID The given drivers id.
+     * @return Returns a 200 response with avarage rating JSON content.
+     */
 	public static Result getAverageRating(int driverID) {
 		ObjectNode jObj = Json.newObject();
 		double avgRating;
@@ -90,12 +113,21 @@ public class DriverController extends Controller {
 		return ok(jObj);
 	}
 
+    /**
+     * This function returns the driver view with all drivers.
+     * @return Returns a driver view with all drivers.
+     */
 	public static Result getDrivers() {
 		List<Driver> allDrivers = service.getDrivers();
 
 		return ok(drivers.render(allDrivers));
 	}
 
+    /**
+     * This function returns a driver view given the driversID.
+     * @param driverID The given drivers id.
+     * @return Returns the drivers view.
+     */
 	public static Result getDriver(int driverID) {
 		Driver driverToView = null;
         Product product;

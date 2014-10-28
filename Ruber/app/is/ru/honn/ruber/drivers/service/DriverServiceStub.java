@@ -9,6 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * <h1>DiverServiceStub</h1>
+ * <h2>is.ru.honn.ruber.drivers.service</h2>
+ * This class simply stubs the information needed from the DataGateway.
+ * We used this to be able to implement the controllers and the presentation layer
+ * without relying on the DataGateway.
+ *
  * Created by steinar on 25.10.2014.
  */
 public class DriverServiceStub implements DriverService {

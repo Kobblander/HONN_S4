@@ -11,18 +11,21 @@ package is.ru.honn.ruber.drivers.service;
  */
 public class DriverNotFoundException extends RuntimeException {
 
-    public DriverNotFoundException() {
-    }
-
+    /**
+     * A constructor which only takes a message as a parameter
+     * @param message The message of the error.
+     */
     public DriverNotFoundException(String message) {
         super(message);
     }
 
+    /**
+     * A constructor which both takes a message as a parameter and another
+     * throwable cause.
+     * @param message The message of the error.
+     * @param cause Another throwable cause.
+     */
     public DriverNotFoundException(String message, Throwable cause) {
         super(message, cause);
-    }
-
-    public DriverNotFoundException(Throwable cause) {
-        super(cause);
     }
 }

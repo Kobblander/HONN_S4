@@ -11,18 +11,21 @@ package is.ru.honn.ruber.drivers.service;
  */
 public class ProductNotFoundException extends RuntimeException {
 
-    public ProductNotFoundException() {
-    }
-
+    /**
+     * A constructor which only takes a message as a parameter
+     * @param message The message of the error.
+     */
     public ProductNotFoundException(String message) {
         super(message);
     }
 
+    /**
+     * A constructor which both takes a message as a parameter and another
+     * throwable cause.
+     * @param message The message of the error.
+     * @param cause Another throwable cause.
+     */
     public ProductNotFoundException(String message, Throwable cause) {
         super(message, cause);
-    }
-
-    public ProductNotFoundException(Throwable cause) {
-        super(cause);
     }
 }
